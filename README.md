@@ -29,6 +29,11 @@ npm -v   # Check npm version</h5>
 <h5>5.Initialize a new Truffle project</h5>
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/73c0c96fb6fec14aa515b8707f56b8b0e72786ba/Screenshot%202025-03-12%20160248.png" 
      alt="Screenshot" width="500">
+<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/b70c46822dc7ed7ff9ce3feb6d3cba105aeb9e47/Screenshot%202025-03-12%20160943.png" 
+     alt="Screenshot" width="500">
+<h5>6.Compile the Contract</h5>
+
+
 
 
 
