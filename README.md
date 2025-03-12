@@ -26,6 +26,8 @@ npm -v   # Check npm version</h5>
 <h5>4.Create a new project folder named SimpleStorageProject</h5>
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/8556e3e0cd47b893c7b02dd8030de29815f35591/Screenshot%202025-03-12%20155851.png" 
      alt="Screenshot" width="500">
+<h5>5.Initialize a new Truffle project</h5>
+
 
 
 
