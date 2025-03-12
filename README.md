@@ -19,3 +19,5 @@ npm -v   # Check npm version</h5>
 <h5>npm install -g truffle</h5>
 <h5>2.Verify Truffle Installation</h5>
 <h5>truffle version</h5>
+<img src="https://github.com/NSharmili/TraceForensics/blob/33fe4954ebe67eb20af280fcc05734e1739a88b9/Screenshot%202025-03-12%20135659.png?raw=true" alt="Image Description" width="500">
+
