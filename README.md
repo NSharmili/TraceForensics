@@ -14,4 +14,4 @@ Follow the setup wizard and ensure the "Add to PATH" option is checked.</h5>
 Open Command Prompt (cmd) or PowerShell and run:
 node -v  # Check Node.js version
 npm -v   # Check npm version</h5>
-![image alt](https://github.com/NSharmili/TraceForensics/blob/2104a1d6f0aa22ca39e5a7b693e99ed49e85ff91/Screenshot%202025-03-12%20133113.png?raw=true)
+![Image Alt Text](https://github.com/NSharmili/TraceForensics/blob/2104a1d6f0aa22ca39e5a7b693e99ed49e85ff91/Screenshot%202025-03-12%20133113.png?raw=true)
