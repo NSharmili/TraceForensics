@@ -7,10 +7,10 @@
 
 <h5>Steps to Deploy Smart Contracts to Ganache Using Truffle</h5>
 <h5>1.Download Node.js
-Visit the official site: https://nodejs.org/
-2.Install Node.js
-Follow the setup wizard and ensure the "Add to PATH" option is checked.
-3.Verify Installation
+Visit the official site: https://nodejs.org/</h5>
+<h5>2.Install Node.js
+Follow the setup wizard and ensure the "Add to PATH" option is checked.</h5>
+<h5></h5>3.Verify Installation
 Open Command Prompt (cmd) or PowerShell and run:
 node -v  # Check Node.js version
 npm -v   # Check npm version</h5>
