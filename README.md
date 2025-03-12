@@ -35,6 +35,9 @@ npm -v   # Check npm version</h5>
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/a0ebc0ae9397ff2a0d2701198764f8497fe31b52/Screenshot%202025-03-12%20161429.png" 
      alt="Screenshot" width="500">
 <h5>Deploy to Ganache</h5>
+<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/d14b8e4758451ca56a637f7d30b4f10390e6ed29/Screenshot%202025-03-12%20161806.png" 
+     alt="Screenshot" width="500">
+
 
 
 
