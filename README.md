@@ -15,4 +15,7 @@ Open Command Prompt (cmd) or PowerShell and run:
 node -v  # Check Node.js version
 npm -v   # Check npm version</h5>
 <img src="https://github.com/NSharmili/TraceForensics/blob/2104a1d6f0aa22ca39e5a7b693e99ed49e85ff91/Screenshot%202025-03-12%20133113.png?raw=true" alt="Image Alt Text" width="500">
-<h5> Install Truffle using npm</h5>
+<h5>1.Install Truffle Globally</h5>
+<h5>npm install -g truffle</h5>
+<h5>2.Verify Truffle Installation</h5>
+<h5>truffle version</h5>
