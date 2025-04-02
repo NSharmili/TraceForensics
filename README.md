@@ -33,6 +33,16 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 ## Autopsy Installation
 <h5>I.Download Autopsy</h5>
 <h5>Go to the official website: https://www.autopsy.com/download/</h5>
+<h5>Click on the Windows installer (.exe) and download it.</h5>
+<h5>II.Run the Installer</h5>
+<h5>Locate the downloaded .exe file and double-click to start the installation.</h5>
+<h5>Follow the on-screen instructions and accept the license agreement.</h5>
+<h5>III.Complete Installation</h5>
+<h5>Choose the installation directory (default is usually fine).</h5>
+<h5>Click Install and wait for the process to finish.</h5>
+<h5>IV.Launch Autopsy</h5>
+<h5>Data Recovery in Autopsy:</h5>
+👉 <h5></h5>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</h5>
 
 
 ## Digital Forensics Tools, Libraries, and Frameworks
