@@ -42,7 +42,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <h5>Click Install and wait for the process to finish.</h5>
 <h5>IV.Launch Autopsy</h5>
 <h5>Data Recovery in Autopsy:</h5>
-👉 <h5></h5>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</h5>
+<h5></h5>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</h5>
 
 
 ## Digital Forensics Tools, Libraries, and Frameworks
