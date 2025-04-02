@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_from_directory
 from PIL import Image
+import numpy as np
 import os
-from flask_cors import CORS
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
@@ -9,63 +9,23 @@ ENCODED_FOLDER = "static/encoded"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(ENCODED_FOLDER, exist_ok=True)
 
-CORS(app)  # Allow cross-origin requests
+def encode_image(cover_path, secret_path, output_path):
+    cover = Image.open(cover_path).convert('RGB')
+    secret = Image.open(secret_path).convert('RGB').resize(cover.size)
+    cover_data = np.array(cover)
+    secret_data = np.array(secret) // 16  # Reduce secret image bit depth
+    encoded_data = (cover_data & 0xF0) | (secret_data & 0x0F)  # Embed secret
+    encoded_img = Image.fromarray(encoded_data.astype('uint8'))
+    encoded_img.save(output_path, format="PNG")
+    return output_path
 
-def encode_text(image_path, message, output_image):
-    img = Image.open(image_path)
-    if img.mode != 'RGB':
-        img = img.convert('RGB')
-    encoded = img.copy()
-    width, height = img.size
-    pixels = encoded.load()
-    message += "###"
-    binary_message = ''.join(format(ord(i), '08b') for i in message)
-
-    max_capacity = width * height * 3
-    if len(binary_message) > max_capacity:
-        print("Message too long! Truncating...")
-        binary_message = binary_message[:max_capacity]
-
-    data_index = 0
-    for y in range(height):
-        for x in range(width):
-            r, g, b = pixels[x, y]
-
-            if data_index < len(binary_message):
-                r = (r & 0xFE) | int(binary_message[data_index])
-                data_index += 1
-            if data_index < len(binary_message):
-                g = (g & 0xFE) | int(binary_message[data_index])
-                data_index += 1
-            if data_index < len(binary_message):
-                b = (b & 0xFE) | int(binary_message[data_index])
-                data_index += 1
-
-            pixels[x, y] = (r, g, b)
-
-            if data_index >= len(binary_message):
-                encoded.save(output_image, format="PNG")
-                return output_image
-
-def decode_text(image_path):
-    img = Image.open(image_path)
-    pixels = img.load()
-    width, height = img.size
-    
-    binary_message = ""
-    for y in range(height):
-        for x in range(width):
-            r, g, b = pixels[x, y]
-            binary_message += str(r & 1)
-            binary_message += str(g & 1)
-            binary_message += str(b & 1)
-
-    byte_message = [binary_message[i:i+8] for i in range(0, len(binary_message), 8)]
-    decoded_text = "".join([chr(int(byte, 2)) for byte in byte_message if int(byte, 2) != 0])
-    
-    if "###" in decoded_text:
-        return decoded_text.split("###")[0]
-    return None
+def decode_image(encoded_path, output_path):
+    encoded = Image.open(encoded_path)
+    encoded_data = np.array(encoded)
+    secret_data = (encoded_data & 0x0F) * 16  # Extract secret
+    secret_img = Image.fromarray(secret_data.astype('uint8'))
+    secret_img.save(output_path, format="PNG")
+    return output_path
 
 @app.route('/')
 def index():
@@ -74,39 +34,33 @@ def index():
 @app.route('/encode', methods=['GET', 'POST'])
 def encode():
     if request.method == 'POST':
-        image = request.files['image']
-        message = request.form['message']
-        if image and message:
-            image_path = os.path.join(UPLOAD_FOLDER, image.filename)
-            output_image = os.path.join(ENCODED_FOLDER, "encoded_" + image.filename)
-            image.save(image_path)
-            try:
-                encoded_image_path = encode_text(image_path, message, output_image)
-                return render_template('encode.html', original=image.filename, encoded="encoded_" + image.filename)
-            except ValueError as e:
-                return str(e)
+        cover = request.files['cover_image']
+        secret = request.files['secret_image']
+        if cover and secret:
+            cover_path = os.path.join(UPLOAD_FOLDER, cover.filename)
+            secret_path = os.path.join(UPLOAD_FOLDER, secret.filename)
+            output_path = os.path.join(ENCODED_FOLDER, 'encoded_' + cover.filename)
+            cover.save(cover_path)
+            secret.save(secret_path)
+            encode_image(cover_path, secret_path, output_path)
+            return render_template('encode.html', original=cover.filename, encoded='encoded_' + cover.filename)
     return render_template('encode.html')
 
 @app.route('/decode', methods=['GET', 'POST'])
 def decode():
     if request.method == 'POST':
-        uploaded_files = request.files.getlist('images')
-        decoded_results = []
-        
-        for file in uploaded_files:
-            if file:
-                image_path = os.path.join(ENCODED_FOLDER, file.filename)
-                file.save(image_path)
-                hidden_text = decode_text(image_path)
-                
-                decoded_results.append({
-                    "image": file.filename,
-                    "hidden_data": hidden_text if hidden_text else "No hidden data"
-                })
-
-        return render_template('decode.html', decoded_data=decoded_results)
-
+        encoded = request.files['encoded_image']
+        if encoded:
+            encoded_path = os.path.join(ENCODED_FOLDER, encoded.filename)
+            output_path = os.path.join(ENCODED_FOLDER, 'decoded_' + encoded.filename)
+            encoded.save(encoded_path)
+            decode_image(encoded_path, output_path)
+            return render_template('decode.html', encoded=encoded.filename, decoded='decoded_' + encoded.filename)
     return render_template('decode.html')
 
+@app.route('/download/<filename>')
+def download_file(filename):
+    return send_from_directory(ENCODED_FOLDER, filename)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5001)  # Change the port as needed
