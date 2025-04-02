@@ -14,34 +14,34 @@
 8. [License](#license)  
 
 ## 1 Introduction  
-<h5>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
+<p>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
 Several real-world incidents highlight the importance of a secure and tamper-proof forensic investigation framework. One such case is the Silk Road darknet marketplace, a hidden online platform used for illegal drug trade and other illicit activities. Cybercriminals communicated through encrypted messages embedded in digital images, making it difficult for law enforcement to trace their transactions. Investigators faced significant challenges in detecting these hidden messages and gathering legally admissible evidence.
 
  Another significant case is the 2014 Sony Pictures cyberattack, where hackers infiltrated the company's systems and leaked vast amounts of sensitive data. The attackers concealed malicious payloads within seemingly harmless files, allowing them to bypass security measures and access confidential corporate information. This breach demonstrated how cybercriminals exploit digital content to conduct large-scale attacks while leaving minimal forensic traces.
  Furthermore, ransomware attacks such as the 2017 WannaCry outbreak have shown how attackers use encryption and covert techniques to extort victims. The ransomware spread rapidly across networks, encrypting crucial data and demanding ransom payments in cryptocurrency. Investigators struggled to track the perpetrators due to the sophisticated methods used to obfuscate their digital footprint, underscoring the need for more effective forensic tools.
 To address these challenges, our research work, TraceForensics, integrates forensic analysis with blockchain technology to create a secure, immutable, and transparent framework for handling digital evidence. The system operates in two key stages. First, TraceForensics allows investigators to recover deleted files and extract hidden data using specialized steganographic analysis techniques. This ensures that even deeply embedded information can be accurately retrieved and examined. Second, unlike traditional forensic tools that lack comprehensive evidence integrity mechanisms, our system securely records all case-related data on a blockchain. Blockchain technology guarantees that every piece of digital evidence remains unaltered, verifiable, and traceable. By establishing a decentralized ledger of forensic data, TraceForensics provides an auditable and legally admissible record of evidence, strengthening the credibility of cybercrime investigations.
-By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<h5>
+By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<p>
  
 ## Ganache Installation  
 <h5>Step 1: Install Ganache</h5>
-<h5>I. Download Ganache from the official Truffle Suite website:
-👉 Ganache Download</h5>
-<h5>II. Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</h5>
-<h5>III. Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5>
+<p>I. Download Ganache from the official Truffle Suite website:
+👉 Ganache Download<p>
+<p>II. Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</p>
+<p>III. Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.<p>
 
 ## Autopsy Installation
-<h5>I. Download Autopsy</h5>
-<h5>Go to the official website: https://www.autopsy.com/download/</h5>
-<h5>Click on the Windows installer (.exe) and download it.</h5>
-<h5>II. Run the Installer</h5>
-<h5>Locate the downloaded .exe file and double-click to start the installation.</h5>
-<h5>Follow the on-screen instructions and accept the license agreement.</h5>
-<h5>III. Complete Installation</h5>
-<h5>Choose the installation directory (default is usually fine).</h5>
-<h5>Click Install and wait for the process to finish.</h5>
-<h5>IV. Launch Autopsy</h5>
-<h5>Data Recovery in Autopsy:</h5>
-<h5></h5>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</h5>
+<p>I. Download Autopsy<p>
+<p>Go to the official website: https://www.autopsy.com/download/<p>
+<p>Click on the Windows installer (.exe) and download it.<p>
+<p>II. Run the Installer<p>
+<p>Locate the downloaded .exe file and double-click to start the installation.<p>
+<p>Follow the on-screen instructions and accept the license agreement.</p>
+<p>III. Complete Installation</p>
+<p>Choose the installation directory (default is usually fine).</p>
+<p>Click Install and wait for the process to finish.</p>
+<p>IV. Launch Autopsy</p>
+<p>Data Recovery in Autopsy:</p>
+<p>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</p>
 
 
 ## Digital Forensics Tools, Libraries, and Frameworks
