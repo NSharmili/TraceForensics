@@ -5,7 +5,7 @@
 
 ## Table of Contents  
 1. [Introduction](#introduction)  
-2. [Installation](#installation)  
+2. [ Ganache Installation](# ganache installation)  
 3. [Digital Forensics Tools, Libraries, and Frameworks](#digital-forensics-tools-libraries-and-frameworks)  
 4. [Features](#features)  
 5. [Directory Structure](#directory-structure)  
