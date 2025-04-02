@@ -17,8 +17,7 @@
 <h5>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
 Several real-world incidents highlight the importance of a secure and tamper-proof forensic investigation framework. One such case is the Silk Road darknet marketplace, a hidden online platform used for illegal drug trade and other illicit activities. Cybercriminals communicated through encrypted messages embedded in digital images, making it difficult for law enforcement to trace their transactions. Investigators faced significant challenges in detecting these hidden messages and gathering legally admissible evidence.
 
-
-Another significant case is the 2014 Sony Pictures cyberattack, where hackers infiltrated the company's systems and leaked vast amounts of sensitive data. The attackers concealed malicious payloads within seemingly harmless files, allowing them to bypass security measures and access confidential corporate information. This breach demonstrated how cybercriminals exploit digital content to conduct large-scale attacks while leaving minimal forensic traces.
+ Another significant case is the 2014 Sony Pictures cyberattack, where hackers infiltrated the company's systems and leaked vast amounts of sensitive data. The attackers concealed malicious payloads within seemingly harmless files, allowing them to bypass security measures and access confidential corporate information. This breach demonstrated how cybercriminals exploit digital content to conduct large-scale attacks while leaving minimal forensic traces.
  Furthermore, ransomware attacks such as the 2017 WannaCry outbreak have shown how attackers use encryption and covert techniques to extort victims. The ransomware spread rapidly across networks, encrypting crucial data and demanding ransom payments in cryptocurrency. Investigators struggled to track the perpetrators due to the sophisticated methods used to obfuscate their digital footprint, underscoring the need for more effective forensic tools.
 To address these challenges, our research work, TraceForensics, integrates forensic analysis with blockchain technology to create a secure, immutable, and transparent framework for handling digital evidence. The system operates in two key stages. First, TraceForensics allows investigators to recover deleted files and extract hidden data using specialized steganographic analysis techniques. This ensures that even deeply embedded information can be accurately retrieved and examined. Second, unlike traditional forensic tools that lack comprehensive evidence integrity mechanisms, our system securely records all case-related data on a blockchain. Blockchain technology guarantees that every piece of digital evidence remains unaltered, verifiable, and traceable. By establishing a decentralized ledger of forensic data, TraceForensics provides an auditable and legally admissible record of evidence, strengthening the credibility of cybercrime investigations.
 By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<h5>
@@ -53,8 +52,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 </h5>
 
 
-
-## Features  
+## Features 
 <h5>1.Integrated System: TraceForensics combines file recovery, steganography detection, and blockchain security into a unified platform, enabling investigators to efficiently recover, analyze, and secure evidence within a single workflow.</h5>
 
 <h5>2.Secure Evidence Handling: The system guarantees that recovered files remain authentic and unaltered. By using secure encryption and blockchain-based storage, it prevents tampering and ensures the integrity of evidence throughout the investigation.</h5>
@@ -63,8 +61,8 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 
 <h5>4.Blockchain-Based Storage: The platform uses blockchain technology to store all case details and forensic actions in a secure, immutable ledger. This provides tamper-proof evidence management, ensuring that the integrity of the evidence is maintained, and creating a transparent, auditable record for legal use.</h5>
 
-## Directory Structure
 
+## Directory Structure
 <h5>Steps to Deploy Smart Contracts to Ganache Using Truffle:</h5>
 <h5>1.Download Node.js
 Visit the official site: https://nodejs.org/</h5>
