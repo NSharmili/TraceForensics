@@ -102,6 +102,7 @@ npm -v   # Check npm version
 
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/73c0c96fb6fec14aa515b8707f56b8b0e72786ba/Screenshot%202025-03-12%20160248.png" 
      alt="Screenshot" width="500">
+     
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/b70c46822dc7ed7ff9ce3feb6d3cba105aeb9e47/Screenshot%202025-03-12%20160943.png" 
      alt="Screenshot" width="500">
 <p><strong>6. Compile the Contract:</strong></p>
