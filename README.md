@@ -5,14 +5,14 @@
 # Project Name
 
 ## Table of Contents  
-- [Introduction](#introduction)  
-- [Getting Started](#getting-started)  
-- [Installation](#installation)  
-- [Usage](#usage)  
-- [Features](#features)  
-- [Directory Structure](#directory-structure)  
-- [Contributing](#contributing)  
-- [License](#license)  
+1. [Introduction](#introduction)  
+2. [Getting Started](#getting-started)  
+3. [Installation](#installation)  
+4. [Usage](#usage)  
+5. [Features](#features)  
+6. [Directory Structure](#directory-structure)  
+7. [Contributing](#contributing)  
+8. [License](#license)  
 
 ## Introduction  
 <h5>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
