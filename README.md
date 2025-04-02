@@ -6,7 +6,7 @@
 ## Table of Contents  
 1. [Introduction](#introduction)  
 2. [Installation](#installation)  
-3. [Usage](#usage)  
+3. [Digital Forensics Tools, Libraries, and Frameworks](#Digital Forensics Tools, Libraries, and Frameworks)  
 4. [Features](#features)  
 5. [Directory Structure](#directory-structure)  
 6. [Contributing](#contributing)  
