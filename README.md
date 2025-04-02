@@ -6,11 +6,11 @@
 ## Table of Contents  
 1. [Introduction](#introduction)  
 2. [Installation](#installation)  
-3. [Digital Forensics Tools, Libraries, and Frameworks](#Digital Forensics Tools, Libraries, and Frameworks)  
+3. [Digital Forensics Tools, Libraries, and Frameworks](#digital-forensics-tools-libraries-and-frameworks)  
 4. [Features](#features)  
 5. [Directory Structure](#directory-structure)  
 6. [Contributing](#contributing)  
-7. [License](#license)  
+7. [License](#license)
 
 ## 1 Introduction  
 <h5>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
