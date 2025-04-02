@@ -25,10 +25,10 @@ By integrating forensic methodologies with blockchain’s security features, Tra
  
 ## Ganache Installation  
 <h5>Step 1: Install Ganache</h5>
-<h5>1.Download Ganache from the official Truffle Suite website:
+<h5>I.Download Ganache from the official Truffle Suite website:
 👉 Ganache Download</h5>
-<h5>2.Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</h5>
-<h5>3.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5>
+<h5>II.Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</h5>
+<h5>III.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5>
 
 ## Autopsy Installation
 <h5>I.Download Autopsy</h5>
