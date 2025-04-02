@@ -45,11 +45,11 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 
 
 ## Digital Forensics Tools, Libraries, and Frameworks
-<h5>A. Forensic Tool: Autopsy</h5>
-<h5>Autopsy is an open-source forensic tool used to recover deleted files. The process involves creating a new case, specifying the location (e.g., drive, folder, or external device), and scanning for deleted files. Autopsy extracts metadata and recovers lost data, ensuring critical evidence is preserved and analyzed effectively.</h5>
-<h5>B. Frameworks</h5>
-<h5>The front end of the system was developed using Flask, a lightweight and versatile Python web framework. Flask was chosen for its simplicity and its ability to integrate seamlessly with Python-based backend solutions. HTML, CSS, and JavaScript were used to design and enhance the user interface, ensuring a responsive and user-friendly design.
-</h5>
+<p><strong>A. Forensic Tool: Autopsy</strong></p>
+<p>Autopsy is an open-source forensic tool used to recover deleted files. The process involves creating a new case, specifying the location (e.g., drive, folder, or external device), and scanning for deleted files. Autopsy extracts metadata and recovers lost data, ensuring critical evidence is preserved and analyzed effectively.</p>
+<p><strong>B. Frameworks</strong></p>
+<p>The front end of the system was developed using Flask, a lightweight and versatile Python web framework. Flask was chosen for its simplicity and its ability to integrate seamlessly with Python-based backend solutions. HTML, CSS, and JavaScript were used to design and enhance the user interface, ensuring a responsive and user-friendly design.</p>
+
 
 
 ## Features 
