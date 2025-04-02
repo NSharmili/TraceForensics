@@ -29,7 +29,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <p>This diagram illustrates the workflow of TraceForensics, integrating file recovery, steganography detection, and blockchain-based evidence management.</p>
 
  
-## 3. Ganache Installation  
+## 2. Ganache Installation  
 <h5>Step 1: Install Ganache</h5>
 
 <p><strong>I. Download Ganache from the official Truffle Suite website:</strong>  
