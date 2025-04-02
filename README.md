@@ -3,15 +3,15 @@
 
 <p style="text-align: right;">Cybercrimes are becoming more advanced, making it difficult for investigators to find and protect digital evidence. Cybercriminals use steganography to hide illegal data within digital files, making detection and recovery challenging. They often delete these files to erase evidence, further complicating investigations. To address this, this research introduces TraceForensics, a blockchain-based cybercrime investigation system designed to securely manage digital evidence. It operates in three key phases: Encoding, where hidden data is embedded in images; Decoding, where stegoanalysts extract concealed messages using forensic techniques; and Evidence Management, where investigators recover deleted files and store case details on a tamper-proof blockchain to ensure security and legal validity. The system involves Administrators, Investigators, Evidence Managers, and Judicial Authorities, ensuring a transparent and secure investigation process. By integrating stegoanalysis, forensic tools, and blockchain technology, TraceForensics enhances cybercrime investigations, ensuring evidence remains authentic, traceable, and tamper-proof.<p>
 
-## Table of Contents  
 1. [Introduction](#introduction)  
-2. [Ganache Installation](#ganache-installation)  
-3. [Autopsy Installation](#autopsy-installation)  
-4. [Digital Forensics Tools, Libraries, and Frameworks](#digital-forensics-tools-libraries-and-frameworks)  
-5. [Features](#features)  
-6. [Directory Structure](#directory-structure)  
-7. [Contributing](#contributing)  
-8. [License](#license)  
+2. [Architecture Diagram](#architecture-diagram)  
+3. [Ganache Installation](#ganache-installation)  
+4. [Autopsy Installation](#autopsy-installation)  
+5. [Digital Forensics Tools, Libraries, and Frameworks](#digital-forensics-tools-libraries-and-frameworks)  
+6. [Features](#features)  
+7. [Directory Structure](#directory-structure)  
+8. [Contributing](#contributing)  
+9. [License](#license)  
 
 ## 1. Introduction  
 <p>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
@@ -22,8 +22,14 @@ Furthermore, ransomware attacks such as the 2017 WannaCry outbreak have shown ho
  
 To address these challenges, our research work, TraceForensics, integrates forensic analysis with blockchain technology to create a secure, immutable, and transparent framework for handling digital evidence. The system operates in two key stages. First, TraceForensics allows investigators to recover deleted files and extract hidden data using specialized steganographic analysis techniques. This ensures that even deeply embedded information can be accurately retrieved and examined. Second, unlike traditional forensic tools that lack comprehensive evidence integrity mechanisms, our system securely records all case-related data on a blockchain. Blockchain technology guarantees that every piece of digital evidence remains unaltered, verifiable, and traceable. By establishing a decentralized ledger of forensic data, TraceForensics provides an auditable and legally admissible record of evidence, strengthening the credibility of cybercrime investigations.
 By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<p>
+
+## 2. Architecture Diagram 
+<h2 id="architecture-diagram">Architecture Diagram</h2>
+<img src="path_to_your_diagram.png" alt="Architecture Diagram" width="600">
+<p>This diagram illustrates the workflow of TraceForensics, integrating file recovery, steganography detection, and blockchain-based evidence management.</p>
+
  
-## 2. Ganache Installation  
+## 3. Ganache Installation  
 <h5>Step 1: Install Ganache</h5>
 
 <p><strong>I. Download Ganache from the official Truffle Suite website:</strong>  
@@ -34,7 +40,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <p><strong>III. Open Ganache</strong> and create a new workspace or use the quickstart option to start a blockchain instance.</p>
 
 
-## 3. Autopsy Installation
+## 4. Autopsy Installation
 <p><strong>I. Download Autopsy</strong></p>
 <p>Go to the official website: <a href="https://www.autopsy.com/download/" target="_blank">Autopsy Download</a></p>
 <p>Click on the Windows installer (.exe) and download it.</p>
@@ -53,14 +59,14 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <p>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</p>
 
 
-## 4. Digital Forensics Tools and Frameworks
+## 5. Digital Forensics Tools and Frameworks
 <p><strong>A. Forensic Tool: Autopsy</strong></p>
 <p>Autopsy is an open-source forensic tool used to recover deleted files. The process involves creating a new case, specifying the location (e.g., drive, folder, or external device), and scanning for deleted files. Autopsy extracts metadata and recovers lost data, ensuring critical evidence is preserved and analyzed effectively.</p>
 <p><strong>B. Frameworks</strong></p>
 <p>The front end of the system was developed using Flask, a lightweight and versatile Python web framework. Flask was chosen for its simplicity and its ability to integrate seamlessly with Python-based backend solutions. HTML, CSS, and JavaScript were used to design and enhance the user interface, ensuring a responsive and user-friendly design.</p>
 
 
-## 5. Features 
+## 6. Features 
 <p><strong>1. Integrated System:</strong> TraceForensics combines file recovery, steganography detection, and blockchain security into a unified platform, enabling investigators to efficiently recover, analyze, and secure evidence within a single workflow.</p>
 
 <p><strong>2. Secure Evidence Handling:</strong> The system guarantees that recovered files remain authentic and unaltered. By using secure encryption and blockchain-based storage, it prevents tampering and ensures the integrity of evidence throughout the investigation.</p>
@@ -70,7 +76,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <p><strong>4. Blockchain-Based Storage:</strong> The platform uses blockchain technology to store all case details and forensic actions in a secure, immutable ledger. This provides tamper-proof evidence management, ensuring that the integrity of the evidence is maintained, and creating a transparent, auditable record for legal use.</p>
 
 
-## 6. Directory Structure
+## 7. Directory Structure
 <p><strong>Steps to Deploy Smart Contracts to Ganache Using Truffle:</strong></p>
 
 <p><strong>1. Download Node.js:</strong> Visit the official site: <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a></p>
