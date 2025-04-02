@@ -27,7 +27,11 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <h5>1.Download Ganache from the official Truffle Suite website:
 👉 Ganache Download</h5>
 <h5>2.Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</h5>
-<h5>3.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5> 
+<h5>3.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5>
+
+## Digital Forensics Tools, Libraries, and Frameworks
+<h5>A. Forensic Tool: Autopsy</h5>
+<h5>Autopsy is an open-source forensic tool used to recover deleted files. The process involves creating a new case, specifying the location (e.g., drive, folder, or external device), and scanning for deleted files. Autopsy extracts metadata and recovers lost data, ensuring critical evidence is preserved and analyzed effectively.</h5>
 
 ## Features  
 <h5>1.Integrated System: TraceForensics combines file recovery, steganography detection, and blockchain security into a unified platform, enabling investigators to efficiently recover, analyze, and secure evidence within a single workflow.</h5>
