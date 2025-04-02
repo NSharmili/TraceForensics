@@ -23,8 +23,9 @@ Furthermore, ransomware attacks such as the 2017 WannaCry outbreak have shown ho
 To address these challenges, our research work, TraceForensics, integrates forensic analysis with blockchain technology to create a secure, immutable, and transparent framework for handling digital evidence. The system operates in two key stages. First, TraceForensics allows investigators to recover deleted files and extract hidden data using specialized steganographic analysis techniques. This ensures that even deeply embedded information can be accurately retrieved and examined. Second, unlike traditional forensic tools that lack comprehensive evidence integrity mechanisms, our system securely records all case-related data on a blockchain. Blockchain technology guarantees that every piece of digital evidence remains unaltered, verifiable, and traceable. By establishing a decentralized ledger of forensic data, TraceForensics provides an auditable and legally admissible record of evidence, strengthening the credibility of cybercrime investigations.
 By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<p>
 
-## 2. Architecture Diagram 
-<img src="path_to_your_diagram.png" alt="Architecture Diagram" width="600">
+<h2 id="architecture-diagram">Architecture Diagram</h2>
+<img src="https://github.com/NSharmili/TraceForensics/blob/53195622364f88db92da0555c91affed37b9acf2/Screenshot%202025-04-02%20112840.png?raw=true" 
+     alt="Architecture Diagram" width="600">
 <p>This diagram illustrates the workflow of TraceForensics, integrating file recovery, steganography detection, and blockchain-based evidence management.</p>
 
  
