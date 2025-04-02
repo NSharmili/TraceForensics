@@ -31,6 +31,9 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <h5>3.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5>
 
 ## Autopsy Installation
+<h5>I.Download Autopsy</h5>
+<h5>Go to the official website: https://www.autopsy.com/download/</h5>
+
 
 ## Digital Forensics Tools, Libraries, and Frameworks
 <h5>A. Forensic Tool: Autopsy</h5>
