@@ -2,6 +2,37 @@
 
 
 <h5>Cybercrimes are becoming more advanced, making it difficult for investigators to find and protect digital evidence. Cybercriminals use steganography to hide illegal data within digital files, making detection and recovery challenging. They often delete these files to erase evidence, further complicating investigations. To address this, this research introduces TraceForensics, a blockchain-based cybercrime investigation system designed to securely manage digital evidence. It operates in three key phases: Encoding, where hidden data is embedded in images; Decoding, where stegoanalysts extract concealed messages using forensic techniques; and Evidence Management, where investigators recover deleted files and store case details on a tamper-proof blockchain to ensure security and legal validity. The system involves Administrators, Investigators, Evidence Managers, and Judicial Authorities, ensuring a transparent and secure investigation process. By integrating stegoanalysis, forensic tools, and blockchain technology, TraceForensics enhances cybercrime investigations, ensuring evidence remains authentic, traceable, and tamper-proof.</h5>
+# Project Name
+
+## Table of Contents  
+- [Introduction](#introduction)  
+- [Getting Started](#getting-started)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Features](#features)  
+- [Directory Structure](#directory-structure)  
+- [Contributing](#contributing)  
+- [License](#license)  
+
+## Introduction  
+A brief overview of the project.  
+
+## Getting Started  
+Instructions on setting up the environment.  
+
+## Installation  
+Steps to install dependencies and configure the project.  
+
+## Usage  
+How to run and use the project.  
+
+## Features  
+- Feature 1  
+- Feature 2  
+- Feature 3  
+
+## Directory Structure  
+
 
 <h5>Steps to Deploy Smart Contracts to Ganache Using Truffle:</h5>
 <h5>1.Download Node.js
