@@ -27,6 +27,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <img src="https://github.com/NSharmili/TraceForensics/blob/53195622364f88db92da0555c91affed37b9acf2/Screenshot%202025-04-02%20112840.png?raw=true" 
      alt="Architecture Diagram" width="300">
 <p>This diagram illustrates the workflow of TraceForensics, integrating file recovery, steganography detection, and blockchain-based evidence management.</p>
+<p>The proposed blockchain-based cybercrime investigation system comprises four key modules: **User Registration, Case Entry, and Evidence Management**. It ensures secure, tamper-proof handling of digital evidence and case details by leveraging blockchain’s transparency and immutability.</p>
 
  
 ## 2. Ganache Installation  
