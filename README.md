@@ -6,15 +6,14 @@
 
 ## Table of Contents  
 1. [Introduction](#introduction)  
-2. [Getting Started](#getting-started)  
-3. [Installation](#installation)  
-4. [Usage](#usage)  
-5. [Features](#features)  
-6. [Directory Structure](#directory-structure)  
-7. [Contributing](#contributing)  
-8. [License](#license)  
+2. [Installation](#installation)  
+3. [Usage](#usage)  
+4. [Features](#features)  
+5. [Directory Structure](#directory-structure)  
+6. [Contributing](#contributing)  
+7. [License](#license)  
 
-## Introduction  
+## 1 Introduction  
 <h5>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
 Several real-world incidents highlight the importance of a secure and tamper-proof forensic investigation framework. One such case is the Silk Road darknet marketplace, a hidden online platform used for illegal drug trade and other illicit activities. Cybercriminals communicated through encrypted messages embedded in digital images, making it difficult for law enforcement to trace their transactions. Investigators faced significant challenges in detecting these hidden messages and gathering legally admissible evidence.
 
@@ -24,13 +23,12 @@ Another significant case is the 2014 Sony Pictures cyberattack, where hackers in
 To address these challenges, our research work, TraceForensics, integrates forensic analysis with blockchain technology to create a secure, immutable, and transparent framework for handling digital evidence. The system operates in two key stages. First, TraceForensics allows investigators to recover deleted files and extract hidden data using specialized steganographic analysis techniques. This ensures that even deeply embedded information can be accurately retrieved and examined. Second, unlike traditional forensic tools that lack comprehensive evidence integrity mechanisms, our system securely records all case-related data on a blockchain. Blockchain technology guarantees that every piece of digital evidence remains unaltered, verifiable, and traceable. By establishing a decentralized ledger of forensic data, TraceForensics provides an auditable and legally admissible record of evidence, strengthening the credibility of cybercrime investigations.
 By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<h5>
  
-
-## Getting Started  
-Instructions on setting up the environment.  
-
 ## Installation  
-Steps to install dependencies and configure the project.  
-
+<h5>Step 1: Install Ganache</h5>
+<h5>1.Download Ganache from the official Truffle Suite website:
+👉 Ganache Download</h5>
+<h5>2.Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</h5>
+<h5>3.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5>
 ## Usage  
 How to run and use the project.  
 
