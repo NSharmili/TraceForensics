@@ -38,7 +38,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 
 <h5>4.Blockchain-Based Storage: The platform uses blockchain technology to store all case details and forensic actions in a secure, immutable ledger. This provides tamper-proof evidence management, ensuring that the integrity of the evidence is maintained, and creating a transparent, auditable record for legal use.</h5>
 
-##Directory Structure
+## Directory Structure
 
 <h5>Steps to Deploy Smart Contracts to Ganache Using Truffle:</h5>
 <h5>1.Download Node.js
