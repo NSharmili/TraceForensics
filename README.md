@@ -77,26 +77,41 @@ npm -v   # Check npm version
 </pre>
 
 <img src="https://github.com/NSharmili/TraceForensics/blob/2104a1d6f0aa22ca39e5a7b693e99ed49e85ff91/Screenshot%202025-03-12%20133113.png?raw=true" alt="Image Alt Text" width="500">
-<h5>1.Install Truffle Globally</h5>
-<h5>npm install -g truffle</h5>
-<h5>2.Verify Truffle Installation</h5>
-<h5>truffle version</h5>
+<p><strong>1. Install Truffle Globally:</strong></p>
+<pre>npm install -g truffle</pre>
+
+<p><strong>2. Verify Truffle Installation:</strong></p>
+<pre>truffle version</pre>
+
 <img src="https://github.com/NSharmili/TraceForensics/blob/33fe4954ebe67eb20af280fcc05734e1739a88b9/Screenshot%202025-03-12%20135659.png?raw=true" alt="Image Description" width="500">
-<h5>1.Steps to Create a Truffle Project</h5>
-<h5>2.Navigate to the D: drive</h5>
-<h5>3.Change directory to truffle</h5>
-<h5>4.Create a new project folder named SimpleStorageProject</h5>
+<p><strong>1. Steps to Create a Truffle Project:</strong></p>
+
+<p><strong>2. Navigate to the D: drive:</strong></p>
+<pre>cd /d D:</pre>
+
+<p><strong>3. Change directory to truffle:</strong></p>
+<pre>cd truffle</pre>
+
+<p><strong>4. Create a new project folder named SimpleStorageProject:</strong></p>
+<pre>mkdir SimpleStorageProject</pre>
+
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/8556e3e0cd47b893c7b02dd8030de29815f35591/Screenshot%202025-03-12%20155851.png" 
      alt="Screenshot" width="500">
-<h5>5.Initialize a new Truffle project</h5>
+<p><strong>5. Initialize a new Truffle project:</strong></p>
+<pre>truffle init</pre>
+
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/73c0c96fb6fec14aa515b8707f56b8b0e72786ba/Screenshot%202025-03-12%20160248.png" 
      alt="Screenshot" width="500">
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/b70c46822dc7ed7ff9ce3feb6d3cba105aeb9e47/Screenshot%202025-03-12%20160943.png" 
      alt="Screenshot" width="500">
-<h5>6.Compile the Contract</h5>
+<p><strong>6. Compile the Contract:</strong></p>
+<pre>truffle compile</pre>
+
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/a0ebc0ae9397ff2a0d2701198764f8497fe31b52/Screenshot%202025-03-12%20161429.png" 
      alt="Screenshot" width="500">
-<h5>Deploy to Ganache</h5>
+<p><strong>Deploy to Ganache:</strong></p>
+<pre>truffle migrate --network development</pre>
+
 <img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/d14b8e4758451ca56a637f7d30b4f10390e6ed29/Screenshot%202025-03-12%20161806.png" 
      alt="Screenshot" width="500">
 
