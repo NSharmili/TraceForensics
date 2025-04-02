@@ -28,16 +28,17 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <h5>1.Download Ganache from the official Truffle Suite website:
 👉 Ganache Download</h5>
 <h5>2.Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</h5>
-<h5>3.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5>
-## Usage  
-How to run and use the project.  
+<h5>3.Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.</h5> 
 
 ## Features  
-- Feature 1  
-- Feature 2  
-- Feature 3  
+<h5>1. **Integrated System**: TraceForensics combines file recovery, steganography detection, and blockchain security into a unified platform, enabling investigators to efficiently recover, analyze, and secure evidence within a single workflow.</h5>
 
-## Directory Structure  
+<h5>2. **Secure Evidence Handling**: The system guarantees that recovered files remain authentic and unaltered. By using secure encryption and blockchain-based storage, it prevents tampering and ensures the integrity of evidence throughout the investigation.</h5>
+
+<h5>3. **Steganography Detection**: TraceForensics includes advanced tools to detect and decode hidden data within digital files. This is essential for uncovering illicit information, such as financial transactions or communications, that may be concealed using steganographic methods.</h5>
+
+<h5>4. **Blockchain-Based Storage**: The platform uses blockchain technology to store all case details and forensic actions in a secure, immutable ledger. This provides tamper-proof evidence management, ensuring that the integrity of the evidence is maintained, and creating a transparent, auditable record for legal use.</h5>
+## Directory Structure.</h5> 
 
 
 <h5>Steps to Deploy Smart Contracts to Ganache Using Truffle:</h5>
