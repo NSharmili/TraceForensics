@@ -45,7 +45,7 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <p>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</p>
 
 
-## 4. Digital Forensics Tools, Libraries, and Frameworks
+## 4. Digital Forensics Tools and Frameworks
 <p><strong>A. Forensic Tool: Autopsy</strong></p>
 <p>Autopsy is an open-source forensic tool used to recover deleted files. The process involves creating a new case, specifying the location (e.g., drive, folder, or external device), and scanning for deleted files. Autopsy extracts metadata and recovers lost data, ensuring critical evidence is preserved and analyzed effectively.</p>
 <p><strong>B. Frameworks</strong></p>
