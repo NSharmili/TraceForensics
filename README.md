@@ -25,23 +25,31 @@ By integrating forensic methodologies with blockchain’s security features, Tra
  
 ## 2. Ganache Installation  
 <h5>Step 1: Install Ganache</h5>
-<p>I. Download Ganache from the official Truffle Suite website:
-👉 Ganache Download<p>
-<p>II. Install it by following the on-screen instructions for your OS (Windows, macOS, or Linux).</p>
-<p>III. Open Ganache and create a new workspace or use the quickstart option to start a blockchain instance.<p>
+
+<p><strong>I. Download Ganache from the official Truffle Suite website:</strong>  
+👉 <a href="https://trufflesuite.com/ganache/" target="_blank">Ganache Download</a></p>
+
+<p><strong>II. Install it</strong> by following the on-screen instructions for your OS (Windows, macOS, or Linux).</p>
+
+<p><strong>III. Open Ganache</strong> and create a new workspace or use the quickstart option to start a blockchain instance.</p>
+
 
 ## 3. Autopsy Installation
-<p>I. Download Autopsy<p>
-<p>Go to the official website: https://www.autopsy.com/download/<p>
-<p>Click on the Windows installer (.exe) and download it.<p>
-<p>II. Run the Installer<p>
-<p>Locate the downloaded .exe file and double-click to start the installation.<p>
+<p><strong>I. Download Autopsy</strong></p>
+<p>Go to the official website: <a href="https://www.autopsy.com/download/" target="_blank">Autopsy Download</a></p>
+<p>Click on the Windows installer (.exe) and download it.</p>
+
+<p><strong>II. Run the Installer</strong></p>
+<p>Locate the downloaded .exe file and double-click to start the installation.</p>
 <p>Follow the on-screen instructions and accept the license agreement.</p>
-<p>III. Complete Installation</p>
+
+<p><strong>III. Complete Installation</strong></p>
 <p>Choose the installation directory (default is usually fine).</p>
 <p>Click Install and wait for the process to finish.</p>
-<p>IV. Launch Autopsy</p>
-<p>Data Recovery in Autopsy:</p>
+
+<p><strong>IV. Launch Autopsy</strong></p>
+
+<p><strong>Data Recovery in Autopsy:</strong></p>
 <p>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</p>
 
 
