@@ -1,0 +1,2061 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain User Management</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.0.3/web3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!--link rel="stylesheet" href="styles.css"-->
+<script src="script.js"></script>
+<style>
+    /* Remove default margin and padding from body */
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure header is fixed to the top */
+.header {
+  background-color: #3a3f51;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  position: fixed; /* Ensures it stays at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensures it stays above other elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Heading styles */
+h1 {
+  font-size: 32px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin: 0; /* Remove any default margin */
+  padding: 0; /* Remove unnecessary padding */
+}
+
+/* Image inside the header */
+h1 img {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 3px solid rgb(237, 237, 245);
+}
+
+body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; 
+background-image: url('images/background.jpg');
+  background-size: cover; /* Ensures the image covers the full page */
+  background-position: center;
+  background-attachment: fixed; /* Keeps the background fixed during scroll */
+  height: 100%; /* Make sure it covers the full height */
+  margin: 0; /* Remove any default margin */}
+/* Register & Login Section - Full-screen background */
+/* Only apply background image to register and login sections */
+/*#bigbox {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}*/
+
+/* Remove background image from other sections */
+.main-content {
+  background-color: #f4f4f4;
+  height: 94.3vh;
+}
+#workProfileContainer {
+  background-color: #f4f4f4;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow: hidden; /* Ensure no scrolling */
+}
+
+
+/* If you want a white background for other sections */
+#dashboardSection {
+  background-color: #f4f4f4; /* Add this if you want a white background for the dashboard */
+  height: 94.3vh;
+}
+
+
+.box{margin: auto; padding: 20px; background: white; box-shadow: 0px 0px 10px gray; border-radius: 10px; margin-top: 90px;
+}
+
+
+.container {
+margin: auto;
+padding: 20px;
+background: white;
+box-shadow: 0px 0px 10px gray;
+border-radius: 10px;
+margin-top: 120px;
+}
+
+.casecontainer {
+margin: auto;
+padding: 20px;
+background: white;
+box-shadow: 0px 0px 10px gray;
+border-radius: 10px;
+margin-top: 120px;
+width: 800px; /* Adjust width if necessary */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#viewCaseForm {
+width: 400px;
+}
+
+#caseDetails {
+width: 100%; /* Adjust width for case details */
+text-align: center; /* Center the case details text */
+}
+#viewMails,#sentMails{width: 800px;}
+#registerSection,  #caseForm { width: 600px; }
+#loginSection,  #myProfile,   #viewCaseForm, #viewMails ,#close-case{ width: 400px; }
+#update-case-forensic{width:1000px; }
+#update-case-stego{width:1200px; }
+#caseForm,#updateCaseForm { width: 800px; }
+#emailForm{width: 800px; }
+#viewAllCasesForm{width:1000px ;}
+#viewMails,#sentMails{width: 800px;}
+.sidebar { width: 200px;  background-color: #3a3f51;color: #fff; padding: 15px; position: fixed; height: 100vh; top: 50px; left: 0; display: flex; flex-direction: column;   text-align: left; }
+.sidebar button {
+background-color: #3a3f51;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adds space between icon and text */
+  text-align: left;
+  width: 100%;
+}
+.sidebar i {
+  width: 20px; /* Ensures icons are aligned */
+}.sidebar button:hover { background: #828383; }
+
+
+.main-content {background-image: none; margin-left: 200px; padding: 20px; background-color: #f4f4f4; flex-grow: 1;overflow-x: hidden; overflow-y: auto;  }
+input, button, select, textarea { display: block; width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; }
+button { background-color: #007bff; color: white; border: none; cursor: pointer;border-radius: 10px;  }
+button:hover { background-color: #0056b3; }
+#useridbtn,#casebtn,#btn {
+  width: 200px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px;
+  font-size: 16px;
+  display: block; /* Ensure it takes full width */
+  margin: 20px auto; /* Center the button horizontally */
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth effect */
+}
+
+
+/* Hover Effect */
+#useridbtn:hover,#casebtn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarges the button */
+}
+
+
+.link { color: #007bff; cursor: pointer; margin-top: 10px; display: inline-block; }
+.hidden { display: none; }
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: -18px; /* Adjust this value if needed */
+}
+
+.form-groups { flex: 1; position: relative; margin-bottom: 20px; text-align: left; }
+.form-groups input, .form-groups file, .form-groups textarea { width: 93%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-groups select{ width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-groups textarea { height: 250px; resize: vertical; }
+.form-groups label { position: absolute; left: 15px; top: 20px; font-size: 16px; color: #656464; transition: 0.3s; pointer-events: none; }
+.form-groups input:focus + label, .form-groups input:not(:placeholder-shown) + label, .form-groups select:focus + label, .form-groups select.filled + label, .form-groups textarea:focus + label, .form-groups textarea:not(:placeholder-shown) + label, .form-groups file:focus + label, .form-groups file:not(:placeholder-shown) + label {top: -4px;  left: 10px; font-size: 13px; color: #007bff; background-color: white; padding: 2px 5px; }
+
+.form-group { flex: 1; position: relative; margin-bottom: 20px; text-align: left; }
+.form-group input, .form-group file, .form-group select, .form-group textarea { width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-group select{ width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-group textarea { height: 100px; resize: vertical; }
+.form-group label { position: absolute; left: 15px; top: 12px; font-size: 16px; color: #656464; transition: 0.3s; pointer-events: none; }
+.form-group input:focus + label, .form-group input:not(:placeholder-shown) + label, .form-group select:focus + label, .form-group select.filled + label, .form-group textarea:focus + label, .form-group textarea:not(:placeholder-shown) + label, .form-group file:focus + label, .form-group file:not(:placeholder-shown) + label { top: -10px; left: 10px; font-size: 13px; color: #007bff; background-color: white; padding: 2px 5px; }
+.register-heading { color: #0542f9; margin-top: 10px; font-size: 32px; margin-bottom: 0px;}
+.login-heading { color: #0542f9; margin-top: 10px; font-size: 20px; }
+.icon-container { display: flex; justify-content: center; margin-bottom: 10px; }
+.round-icon { width: 90px; height: 90px; border-radius: 50%; }
+
+
+.large-icon { font-size: 120px; color: #333; }
+#viewMails { width: 100%; max-width: 600px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9; overflow: hidden; }
+#mailsList { max-height: 300px; overflow-y: auto;  padding: 10px; }
+.mail-item { padding: 10px; cursor: pointer; background: white;border: 1px solid #ccc; margin-bottom: 10px; border-radius: 5px; transition: background 0.3s ease-in-out; }
+.mail-item:hover { background: #e0e0e0; }
+.subject-text { text-align: left; margin: 0; }
+.popup-container { display: none; position: fixed; top: 50%; left: 60%; transform: translate(-50%, -50%); width: 700px; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; }
+.popup-content { background: white; padding: 20px; border-radius: 10px; width: 100%; height: 100%; text-align: left; position: relative; }
+.close-btn { position: absolute; top: 10px; right: 15px; font-size: 20px; cursor: pointer; }
+
+.suspect-device-wrapper {
+  display: flex;
+  align-items: center; /* Ensures vertical alignment */
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+.suspect-device-wrapper .form-groups {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+
+.add-btn, .remove-btn {
+background-color: white;
+  height: 40px; /* Match input field height */
+  width: 40px; /* Keep buttons square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Adjust icon size */
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+  margin-top: -10px;
+}
+
+
+.add-btn:hover, .remove-btn:hover {
+background-color: white;
+}
+
+.forensic-result-row {
+  display: flex;
+  align-items: center; /* Aligns items in the same row */
+  gap: 15px; /* Provides spacing between fields */
+  margin-bottom: 10px; /* Adds spacing between rows */
+  width: 100%;
+}
+
+.forensic-result-row input {
+  flex: 1; /* Ensures equal width for inputs */
+  min-width: 180px; /* Sets a minimum width */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.suspect-field, .device-field {
+  background-color: #f0f0f0; /* Light gray background for read-only fields */
+  color: #333;
+  font-weight: bold;
+}
+
+.fa-result {
+  background-color: white; /* Editable field stays white */
+  border: 2px solid #007bff; /* Highlight FA result input */
+}
+.stego-result-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.stego-result-row input, .stego-result {
+  flex: 1;
+  min-width: 180px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.suspect-field, .device-field, .fa-result {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+}
+
+.stego-result {
+  background-color: white;
+  border: 2px solid #007bff;
+  min-height: 40px; /* Ensures proper height */
+  padding: 6px;
+}
+/* Container for labels */
+.labels-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+/* Individual label item */
+.label-item {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Wrapper for each row of inputs */
+.stego-result-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+/* Styling for each input field */
+.stego-result-row input,
+.stego-result-row textarea {
+  width: 200px;
+  padding: 5px;
+  margin: 0 5px;
+}
+/* Container for labels */
+.labels-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+/* Individual label item */
+.label-item {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Wrapper for each row of inputs */
+.forensic-result-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+/* Styling for each input field */
+.forensic-result-row input,
+.forensic-result-row textarea {
+  width: 200px;
+  padding: 5px;
+  margin: 0 5px;
+}
+
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-height: 80vh; /* Limit height */
+  overflow: auto; /* Enable scrolling */
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  text-align: left; /* Align all content to the left */
+}
+
+.popup-container h1, .popup-container h3, .popup-container p {
+  margin: 10px 0;
+}
+
+.popup-container span {
+  float: right; /* Time should be aligned right */
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  backdrop-filter: blur(5px); /* Blur effect */
+  z-index: 1000;
+  display: none;
+}
+.cases-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #f3f3f3; /* Set a common background color */
+  }
+
+  .cases-table th, 
+  .cases-table td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+      background-color: #f3f3f3; /* Ensure all fields have the same background */
+  }
+
+  .cases-table thead {
+      background-color: #d3d3d3; /* Slightly different for distinction, optional */
+  }
+  .sub-container {
+      text-align: center;
+      cursor: pointer; /* Make it look clickable */
+  }
+
+  .sub-container img {
+      width: 1000px;
+      height: 1000px;
+  }
+
+  .sub-container p {
+      font-size: 18px;
+      margin-top: 5px;
+      font-weight: bold;
+  }
+
+  /* Hover effect */
+  .sub-container:hover {
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #emailBody {
+    min-height: 300px; /* Minimum height */
+    resize: vertical; /* Allows manual resizing */
+    overflow-y: auto; /* Enables scrolling if content exceeds height */
+    display: block; /* Ensures it behaves as a block element */
+}
+.forensic-result-row {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduced gap */
+    width: 100%;
+}
+
+.suspect-field, .device-field {
+    min-width: 80px; /* Smaller fixed width */
+    max-width: 100px; /* Prevents excessive stretching */
+    flex: 0 0 auto; /* Prevents expansion */
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.fa-result,.stego-result {
+    flex: 1; /* Takes all remaining space */
+    min-width: 200px; /* Ensures it doesn’t shrink too much */
+    max-width: 100%; /* Prevents overflow */
+    min-height: 100px; /* Minimum height */
+    max-height: 200px; /* Maximum height */
+    overflow-y: auto; /* Enables scrolling when needed */
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allows vertical resizing */
+}
+
+.labels-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 2px; /* Reduce gap between labels */
+    font-weight: bold;
+    width: 100%;
+}
+
+.label-item {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+</style>
+
+</head>
+<body>
+    <!-- Register Section -->
+     <div id="bigbox">
+    <div class="box" id="registerSection">
+        <h2 class="register-heading">Digital Forensics Using Blockchain</h2>
+        <div class="icon-container">
+            <img src="images/img3.png" alt="Project Icon" class="round-icon"> 
+        </div>
+        <h2>Register</h2>
+        <div class="form-row">
+        <div class="form-groups">
+            <input type="text" id="regName" placeholder=" " required>
+            <label for="regName">Name</label>
+        </div>
+        
+        <div class="form-groups">
+            <input type="email" id="regEmail" placeholder=" " required>
+            <label for="regEmail">Email</label>
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-groups">
+            <input type="text" id="regPhone" placeholder=" " required>
+            <label for="regPhone">Phone</label>
+        </div>
+        <div class="form-groups">
+            <select id="regRole" required onchange="updateSelectLabel()">
+                <option value="" disabled selected></option>
+                <option value="Suspect">Suspect</option>
+                <option value="Investigator">Investigator</option>
+                <option value="ForensicAnalyst">Forensic Analyst</option>
+                <option value="StegoAnalyst">Stego Analyst</option>
+                <option value="HigherAuthority">Higher Authority</option>
+            </select>
+            <label for="regRole">Select Role</label>
+        </div>
+        
+        </div>
+        <div class="form-row">
+            <div class="form-groups">
+                <input type="password" id="regPassword" placeholder=" " required>
+                <label for="regPassword">Password</label>
+            </div>
+        <div class="form-groups">
+            <input type="password" id="confirmPassword" placeholder=" " required>
+            <label for="confirmPassword">Confirm Password</label>
+        </div>
+        
+        </div>
+        <button id="useridbtn" onclick="generateUserID()">Generate Unique ID</button>
+
+    <div class="form-group hidden" id="userIDContainer">
+        <input type="text" id="regUserID" placeholder=" " readonly>
+        <label for="regUserID">Unique User ID</label>
+    </div>
+    
+        <button onclick="registerUser()"id="registerBtn"  class="hidden">Register</button>
+        <p class="link" onclick="showLogin()">Already have an account? Login here</p>
+    </div>
+
+     <!-- Login Section -->
+     <div class="box hidden" id="loginSection">
+        <h2 class="login-heading">Digital Forensics Using Blockchain</h2>
+        <div class="icon-container">
+            <img src="images/img3.png" alt="Project Icon" class="round-icon"> 
+        </div>
+        <h2>Login</h2>
+        <div class="form-group">
+            <input type="text" id="loginIdentifier" placeholder=" " required>
+            <label for="loginIdentifier">Email or UserID</label>
+        </div>
+        
+        <div class="form-group">
+            <input type="password" id="loginPassword" placeholder=" " required>
+            <label for="loginPassword">Password</label>
+        </div>
+        <button onclick="loginUser()">Login</button>
+        <p class="link" onclick="showRegister()">Don't have an account? Register here</p>
+    </div>
+  </div>
+   <!-- Dashboard Section -->
+   <div id="dashboardSection" class="hidden">
+    <div class="header"> <h1>
+        <img src="images/img3.png" alt="Icon" >
+        Digital Forensics Using Blockchain
+    </h1></div>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <button data-target="myProfile"><i class="fas fa-user"></i> My Profile</button>
+        <button data-target="workProfile"><i class="fas fa-briefcase"></i> Work Profile</button>
+        <button data-target="caseForm"><i class="fas fa-plus-circle"></i> New Case</button>
+        <button data-target="updateCaseForm"><i class="fas fa-edit"></i> Update Case</button>
+        <button data-target="viewCaseForm"><i class="fas fa-eye"></i> View Case</button>
+        <button data-target="viewAllCasesForm"><i class="fas fa-folder-open"></i> View All Cases</button>
+        <button data-target="emailForm"><i class="fas fa-envelope"></i> Case Coordination Hub</button>
+        <button data-target="viewMails"><i class="fas fa-inbox"></i>Notification</button>
+        <button data-target="sentMails"><i class="fas fa-paper-plane"></i>  Sent Messages</button>
+        <button onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+        <div class="main-content" id="mainContent">
+            <div class="container" id="myProfile">
+                <i class="fa-solid fa-user large-icon"></i>
+                <p><strong>User Name :</strong> <span id="userName"></span></p>
+                <p><strong>User ID :</strong> <span id="userId"></span></p>
+                <p><strong>Email :</strong> <span id="userEmail"></span></p>
+                <p><strong>Role :</strong> <span id="userRole"></span></p>
+                <p><strong>Phone :</strong> <span id="userPhone"></span></p>
+                <p><strong>Password :</strong> <span id="userPassword"></span></p>
+                <p><strong>Registered Time :</strong> <span id="userRegisteredTime"></span></p>
+            </div>
+
+              <!-- Case Registration Section -->
+              <div class="container hidden" id="caseForm"> 
+                <h2>Case Registration</h2>
+                <div class="form-row">
+                    <div class="form-groups">
+                        <input type="text" id="caseId" placeholder=" " required>
+                        <label for="caseId">Case ID(ex:CAS101)</label>
+                    </div>
+                    <div class="form-groups">
+                        <input type="text" id="caseTitle" placeholder=" " required>
+                        <label for="caseTitle">Case Title</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea type="text" id="description" placeholder=" " required></textarea>
+                    <label for="description">Description</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="investigator" placeholder=" " required>
+                    <label for="investigator">Investigator</label>
+                </div>
+                <div id="suspectDeviceContainer" class="form-groups">
+                  <div class="suspect-device-wrapper" >
+                      <div class="form-groups">
+                          <input type="text" class="suspect" placeholder=" " required style="width: 320px;" >
+                          <label>Enter suspect name</label>
+                      </div>
+                      <div class="form-groups">
+                          <input type="text" class="digitalDevice" placeholder=" " required style="width:320px;" >
+                          <label>Enter device name</label>
+                      </div>
+                      <button type="button" class="add-btn" onclick="addSuspectDevice(this)">➕</button>
+                      <button type="button" class="remove-btn" style="display: none;">❌</button>
+                  </div>
+              </div>
+                <button id= "casebtn" onclick="registerCase()">Submit Case</button>
+            </div>
+            
+
+           <!-- Email Section -->
+<div class="container hidden" id="emailForm">
+  <h2>Send Email</h2>
+  
+  <div class="form-group">
+      <input type="email" id="senderEmail" placeholder=" " disabled>
+      <label for="senderEmail">From</label>
+  </div>
+
+  <div class="form-group">
+      <select id="emailRole" required onchange="updateSelectLabel()">
+          <option value="" disabled selected></option>
+      </select>
+      <label for="emailRole">Select Role</label>
+  </div>
+
+  <div class="form-group">
+      <select id="receiverEmail" required onchange="updateSelectLabel()">
+          <option value="" disabled selected></option>
+      </select>
+      <label for="receiverEmail">To</label>
+  </div>
+
+  <div class="form-group">
+      <input type="text" id="emailSubject" placeholder=" " required>
+      <label for="emailSubject">Subject</label>
+  </div>
+
+  <div class="form-group">
+      <textarea id="emailBody" placeholder=" " required></textarea>
+      <label for="emailBody">Body</label>
+  </div>
+
+  <div class="form-group">
+      <input type="file" id="emailAttachment" multiple>
+      <label for="emailAttachment">Attach Files</label>
+  </div>
+
+  <button id="btn" onclick="sendEmail()">Send</button>
+</div>
+
+<div class="container hidden" id="viewMails">
+  <h2 style="text-align: center;">Received Mails</h2>
+  <div class="form-group">
+      <input type="email" id="inboxEmail" placeholder=" " disabled>
+      <label for="inboxEmail">Email</label>
+  </div>
+  <div id="receivedMailsList"></div> <!-- Changed ID -->
+</div>
+
+<div class="container hidden" id="sentMails">
+  <h2 style="text-align: center;">Sent Mails</h2>
+  <div class="form-group">
+      <input type="email" id="viewSenderEmail" placeholder=" " disabled>
+      <label for="viewSenderEmail">Email</label>
+  </div>
+  <div id="sentMailsList"></div> <!-- Changed ID -->
+</div>
+
+          <!-- Popup for Mail Details -->
+<div id="mailPopup" class="popup-container">
+  <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">×</span>
+      <div id="mailPopupContent"></div>
+  </div>
+</div>
+
+            <div class="container hidden" id="updateCaseForm">  
+              <h2 style="font-size: 24px;">Update Case</h2>
+          
+              <!-- Main container for subcontainers -->
+              <div class="sub-container-wrapper" style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
+                  
+                  <!-- Subcontainer 1 -->
+                  <div class="sub-container" style="text-align: center; cursor: pointer;" onclick="showSection('update-case-forensic')">
+                      <img src="images/FA_results.png" alt="Forensic Analyst" style="width: 200px; height: 200px;">
+                      <p>ForensicAnalysis Phase</p>
+                  </div>
+                  
+                  <!-- Subcontainer 2 -->
+                  <div class="sub-container" style="text-align: center; cursor: pointer;" onclick="showSection('update-case-stego')">
+                      <img src="images/SA_results.jpg" alt="Stego Analyst" style="width: 200px; height: 200px;">
+                      <p>StegoAnalysis Phase</p>
+                  </div>
+                  
+                  <!-- Subcontainer 3 -->
+                  <div class="sub-container" style="text-align: center; cursor: pointer;" onclick="showSection('close-case')">
+                      <img src="images/case_closed.png" alt="Report" style="width: 200px; height: 200px;">
+                      <p>Finalization Phase</p>
+                  </div>
+              </div>
+          </div>
+          
+          
+<!-- Sections for forensic, stego, and case closing -->
+<!-- Sections for forensic, stego, and case closing -->
+<section id="update-case-forensic" class="container hidden">
+  <h2>Update Case by Forensic</h2>
+  <div class="form-group">
+    <input type="text" id="forensicCaseId" placeholder=" " required>
+    <label for="forensicCaseId">Case ID:</label>
+  </div>
+  <div class="form-group">
+    <input type="text" id="forensicAnalyst" placeholder=" " required>
+    <label for="forensicAnalyst">Analyst Name:</label>
+  </div>
+  <div id="forensicResultsContainer"></div>
+  <button id="btn"onclick="updateCaseForensic()">Update Case</button>
+</section>
+
+<section id="update-case-stego" class="container hidden">
+  <h2>Update Case by Stego</h2>
+  <div class="form-group">
+    <input type="text" id="stegoCaseId" placeholder=" " required>
+    <label for="stegoCaseId">Case ID:</label>
+  </div>
+  <div class="form-group">
+    <input type="text" id="stegoAnalyst" placeholder=" " required>
+    <label for="stegoAnalyst">Analyst Name:</label>
+  </div>
+  <div id="stegoResultsContainer"></div>
+  <button id="btn" onclick="updateCaseStego()">Update Case</button>
+</section>
+
+
+<section id="close-case" class="container hidden">
+  <h2>Close Case</h2>
+  <div class="form-group">
+    <input type="text" id="closeCaseId" placeholder=" " required>
+    <label for="closeCaseId">Case ID:</label>
+</div>
+<div class="form-group">
+  <textarea id="report" placeholder=" " required></textarea>
+  <label for="report">Summary</label>
+</div>
+  <button onclick="closeCase()">Close</button>
+</section>
+            <!-- View Case -->
+            <!-- View Case Form -->
+<div class="container hidden" id="viewCaseForm">
+  <h2>View Case</h2>
+  <div class="form-group">
+    <input type="text" id="viewCaseId" placeholder=" " required>
+    <label for="viewCaseId">Case ID</label>
+  </div>
+  <button onclick="viewCase()">View</button>
+</div>
+
+<!-- Case Details Container -->
+<div class="casecontainer hidden" id="caseContainer">
+  <div id="caseDetails"></div>
+</div>
+            <!-- View All Cases -->
+            <div class="container hidden" id="viewAllCasesForm">
+              <h2>All Cases</h2>
+              <div id="allCases"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.querySelector(".sidebar").addEventListener("click", function (e) {        
+    if (e.target.tagName === "BUTTON") {                  
+        document.getElementById("mailPopup").style.display = "none";         
+        const targetId = e.target.dataset.target;         
+        selectedCaseId = "";                  
+
+        // Hide all sections dynamically         
+        document.querySelectorAll(".container, .casecontainer").forEach(el => el.classList.add("hidden"));          
+
+        // Hide viewAllCasesForm and allCases table initially         
+        document.getElementById("viewAllCasesForm").style.display = "none";         
+        document.getElementById("allCases").style.display = "none";  
+
+        // Ensure workProfileContainer is hidden when clicking another sidebar button
+        document.getElementById("workProfileContainer")?.classList.add("hidden");
+
+        if (targetId === "emailForm") {             
+            // Show only the email form             
+            document.getElementById("emailForm").classList.remove("hidden");         
+        } else if (targetId === "viewAllCasesForm") {             
+            viewAllCases();              
+            document.getElementById("caseContainer").classList.add("hidden");               
+            document.getElementById("allCases").style.display = "block";                    
+            document.getElementById("viewAllCasesForm").style.display = "block";           
+        } else if (targetId === "viewMails" || targetId === "sentMails") {             
+            document.getElementById(targetId).classList.remove("hidden");              
+            if (targetId === "viewMails") {                 
+                getReceivedMails();             
+            } else {                 
+                getSentMails();             
+            }          
+        } else if (targetId === "workProfile") {             
+            const role = document.getElementById("userRole").innerText.trim();             
+            const rolePages = {                 
+                "Suspect": "suspect.html",                 
+                "Investigator": "CaseRegistration.html",                 
+                "ForensicAnalyst": "autopsy.html",                 
+                "StegoAnalyst": "stegoanalyst.html",                 
+                "HigherAuthority": "CaseDetails.html"             
+            };              
+
+            if (rolePages[role]) {     
+                let workProfileDiv = document.getElementById("workProfileContainer");     
+                if (!workProfileDiv) {         
+                    workProfileDiv = document.createElement("div");         
+                    workProfileDiv.id = "workProfileContainer";         
+                    workProfileDiv.style.width = "100%";         
+                    workProfileDiv.style.height = "100%";         
+                    workProfileDiv.style.overflow = "hidden"; // Prevent scrolling in the div         
+                    workProfileDiv.innerHTML = `<iframe src="${rolePages[role]}" width="100%" height="100%" style="border: none; margin: 0px;margin-top:30px; overflow: hidden;" scrolling="no"></iframe>`;         
+                    document.getElementById("mainContent").appendChild(workProfileDiv);     
+                }                  
+                workProfileDiv.classList.remove("hidden");             
+            } else {                 
+                document.getElementById("mainContent").innerHTML = `<h2>No profile page assigned for this role.</h2>`;             
+            }         
+        } else {             
+            const workProfileDiv = document.getElementById("workProfileContainer");             
+            if (workProfileDiv) workProfileDiv.classList.add("hidden");              
+
+            document.getElementById(targetId).classList.remove("hidden");         
+        }     
+    } 
+});
+
+
+
+
+// Automatically call fetchCaseForForensic when a Case ID is entered for forensic
+document.getElementById('forensicCaseId').addEventListener('input', function() {
+    const caseId = this.value.trim();
+    if (caseId) {
+        fetchCaseForForensic();  // Automatically fetch case details when Case ID is entered
+    }
+});
+
+// Automatically call fetchCaseForStego when a Case ID is entered for stego
+document.getElementById('stegoCaseId').addEventListener('input', function() {
+    const caseId = this.value.trim();
+    if (caseId) {
+        fetchCaseForStego();  // Automatically fetch case details when Case ID is entered
+    }
+});
+
+  // Role-based permissions for the sidebar
+  const rolePermissions = {
+    "Suspect": ["myProfile","workProfile", "logout"],
+    "Investigator": ["myProfile", "caseForm", "updateCaseForm", "viewCaseForm", "viewAllCasesForm", "emailForm", "viewMails","sentMails","logout"],
+    "ForensicAnalyst": ["myProfile","workProfile", "emailForm", "viewMails","sentMails", "logout"],
+    "StegoAnalyst": ["myProfile","workProfile", "emailForm", "viewMails","sentMails", "logout"],
+    "HigherAuthority": ["myProfile","viewCaseForm", "logout"]
+  };
+  function showSection(sectionId) {
+  // Hide the main form container
+  document.getElementById("updateCaseForm").classList.add("hidden");
+
+  // Hide all sections
+  document.getElementById("update-case-forensic").classList.add("hidden");
+  document.getElementById("update-case-stego").classList.add("hidden");
+  document.getElementById("close-case").classList.add("hidden");
+
+  // Show the selected section
+  document.getElementById(sectionId).classList.remove("hidden");
+}
+
+
+  function showLogin() {
+    document.getElementById("registerSection").classList.add("hidden");
+    document.getElementById("loginSection").classList.remove("hidden");
+}
+
+function showRegister() {
+    document.getElementById("loginSection").classList.add("hidden");
+    document.getElementById("registerSection").classList.remove("hidden");
+}
+
+function updateSelectLabel() {
+    const selectFields = ["regRole", "status", "emailRole", "receiverEmail"];
+
+    selectFields.forEach(id => {
+        const selectField = document.getElementById(id);
+        if (selectField) {
+            selectField.classList.toggle("filled", !!selectField.value);
+        }
+    });
+}
+
+
+        async function generateUserID() {
+    const email = document.getElementById("regEmail").value;
+    const phone = document.getElementById("regPhone").value;
+
+    if (!email || !phone) {
+        alert( "Email and phone are required to generate a user ID.");
+        return;
+    }
+     // Validate email format using regex
+     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+        alert("⚠️Please enter a valid email address!");
+        return;
+    }
+
+    // Validate phone number format using regex (assumes phone starts with 9, 8, 7, or 6 and is 10 digits long)
+    const phonePattern = /^[6789]\d{9}$/;
+    if (!phonePattern.test(phone)) {
+        alert("⚠️Please enter a valid phone number starting with 9, 8, 7, or 6 and 10 digits long.");
+        return;
+    }
+
+
+    try {
+        const users = await userContract.methods.viewRegisteredUsers().call();
+
+        if (users.some(u => u.email === email || u.phone === phone)) {
+            alert( "Email or phone already exists. Please use a different one.");
+            return;
+        }
+
+        const userID = "0x" + web3.utils.keccak256(email + phone).substring(2, 42);
+        document.getElementById('regUserID').value = userID;
+        document.getElementById('userIDContainer').classList.remove('hidden');
+        document.getElementById("registerBtn").classList.remove("hidden");
+
+    } catch (error) {
+        alert( "Error checking user existence. Please try again.");
+    }
+}
+
+
+function getCurrentTimestamp() {
+    const now = new Date();
+    return now.getFullYear() + '-' + 
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0') + ' ' +
+        String(now.getHours()).padStart(2, '0') + ':' +
+        String(now.getMinutes()).padStart(2, '0') + ':' +
+        String(now.getSeconds()).padStart(2, '0') + '.' +
+        String(now.getMilliseconds()).padStart(3, '0');
+}
+
+        async function registerUser() {
+            //let id=document.getElementById("regId").value;
+            
+            let name = document.getElementById("regName").value;
+            let email = document.getElementById("regEmail").value;
+            let phone = document.getElementById("regPhone").value;
+            let password = document.getElementById("regPassword").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let role = document.getElementById("regRole").value;
+            const timestamp = getCurrentTimestamp();
+            const userID = "0x" + web3.utils.keccak256(email + phone).substring(2, 42);
+            if (!name || !email || !phone || !password || !role) {
+      alert("⚠️All fields are required!");
+      return;
+    }
+    if (password !== confirmPassword) {
+        alert("⚠️Passwords do not match!")
+    return;
+}
+try {
+        // Register user on the blockchain
+        await userContract.methods.registerUser(userID, name, email, phone, password, role, timestamp).send({ from: accounts[0], gas: 1000000 });
+        alert("✅ Registration Successful! Please log in.");
+        showLogin(); // Show the login form after successful registration
+    } catch (error) {
+        console.error(error);
+        alert("❌Error during registration. Please try again.");
+    }
+}
+
+async function loginUser() {
+  let identifier = document.getElementById("loginIdentifier").value;
+  let password = document.getElementById("loginPassword").value;
+
+  if (!identifier || !password) {
+      alert("All fields are required!");
+      return;
+  }
+
+  try {
+      let users = await userContract.methods.viewRegisteredUsers().call();
+      const userData = users.find(u => u.email === identifier || u.userID === identifier);
+
+      if (!userData || userData.password !== password) {
+          alert("⚠️Invalid Credentials");
+          return;
+      }
+
+      console.log(userData); // Debugging: Check the data structure in the console
+
+      // Ensure correct field mapping
+      document.getElementById("userId").innerText = userData.userID || "N/A";
+      document.getElementById("userName").innerText = userData.username || "N/A";
+      document.getElementById("userEmail").innerText = userData.email || "N/A";
+      document.getElementById("userPhone").innerText = userData.phone || "N/A";
+      document.getElementById("userPassword").innerText = userData.password || "N/A";
+      document.getElementById("userRole").innerText = userData.role || "N/A";
+      document.getElementById("userRegisteredTime").innerText = userData.registeredTime || "N/A";
+
+      // Assign sender email values
+      document.getElementById("senderEmail").value = userData.email;
+      document.getElementById("viewSenderEmail").value = userData.email;
+      document.getElementById("inboxEmail").value = userData.email;
+      
+
+      // Hide login section and show dashboard
+      document.getElementById("loginSection").classList.add("hidden");
+      document.getElementById("dashboardSection").classList.remove("hidden");
+      updateSidebarPermissions(userData.role);
+      setupRoleDropdown(userData.role);
+
+  } catch (error) {
+      alert("❌Login failed! Please check your credentials.");
+      console.error(error);
+  }
+}
+
+// Function to update sidebar based on user role
+function updateSidebarPermissions(role) {
+  const allowedButtons = rolePermissions[role] || [];
+
+  document.querySelectorAll(".sidebar button").forEach(button => {
+      if (allowedButtons.includes(button.dataset.target) || button.innerText === "Logout") {
+          button.style.display = "block";
+      } else {
+          button.style.display = "none";
+      }
+  });
+}
+
+// Function to handle sidebar navigation
+document.querySelectorAll(".sidebar button").forEach(button => {
+  button.addEventListener("click", function () {
+      document.querySelectorAll(".main-content .container").forEach(section => {
+          section.classList.add("hidden");
+      });
+
+      const targetSection = this.dataset.target;
+      if (targetSection) {
+          document.getElementById(targetSection).classList.remove("hidden");
+      }
+  });
+});
+async function getSentMails() {
+    let email = document.getElementById("viewSenderEmail").value;
+    let mails = await mailContract.methods.getMails(email).call();
+    let sentMails = mails.filter(mail => mail.sender.toLowerCase() === email.toLowerCase());
+
+    displayMails(sentMails, "sent"); // Pass type
+}
+
+async function getReceivedMails() {
+    let email = document.getElementById("inboxEmail").value;
+    let mails = await mailContract.methods.getMails(email).call();
+    let receivedMails = mails.filter(mail => mail.receiver.toLowerCase() === email.toLowerCase());
+
+    displayMails(receivedMails, "received"); // Pass type
+}
+
+
+function displayMails(mails, type) {
+    let mailsListId = type === "sent" ? "sentMailsList" : "receivedMailsList";
+    let mailsList = document.getElementById(mailsListId);
+
+    let reversedMails = [...mails].reverse();
+
+    mailsList.innerHTML = reversedMails.length
+        ? reversedMails.map((mail, index) => `
+            <div class="mail-item" onclick="showMailDetails(${index}, '${type}')">
+                <p class="subject-text">${mail.subject}</p>
+            </div>
+        `).join('')
+        : "<p>No mails found.</p>";
+
+    if (type === "sent") {
+        window.sentMails = reversedMails;  // Store sent mails globally
+    } else {
+        window.receivedMails = reversedMails;  // Store received mails globally
+    }
+
+    document.getElementById(type === "sent" ? "sentMails" : "viewMails").classList.remove("hidden");
+}
+
+
+function showMailDetails(index, type) {
+    let mail = type === "sent" ? window.sentMails[index] : window.receivedMails[index];
+
+    // Hide the correct section
+    if (type === "sent") {
+        document.getElementById("sentMails").classList.add("hidden");
+    } else {
+        document.getElementById("viewMails").classList.add("hidden");
+    }
+
+    let popup = document.getElementById("mailPopup");
+    let popupContent = document.getElementById("mailPopupContent");
+
+    popupContent.innerHTML = `
+        <p><strong>From:</strong> ${mail.sender}</p>
+        <p><strong>To:</strong> ${mail.receiver}</p>
+        <p><strong>Subject:</strong> ${mail.subject}</p>
+        <p>${mail.body}</p>
+    `;
+
+    popup.style.display = "flex";  // Show popup
+
+    // Store the mail type globally to restore the correct section later
+    window.currentMailType = type;
+}
+
+function closePopup() {
+    document.getElementById("mailPopup").style.display = "none";
+
+    if (window.currentMailType === "sent") {
+        document.getElementById("sentMails").classList.remove("hidden");
+    } else {
+        document.getElementById("viewMails").classList.remove("hidden");
+    }
+}
+
+
+
+function logoutUser() {
+    alert("You have been logged out.");
+    localStorage.removeItem("currentUser"); // Clear user session
+    localStorage.removeItem("lastVisitedSection"); // Clear last visited section
+    location.reload();
+}
+   // Check if user is already logged in and restore the last visited section
+window.onload = function () {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const lastVisitedSection = localStorage.getItem("lastVisitedSection") || "dashboardSection";
+
+    if (currentUser) {
+        document.getElementById("userName").innerText = currentUser.name;
+        document.getElementById("userRole").innerText = currentUser.role;
+        document.getElementById("registerSection").classList.add("hidden");
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("dashboardSection").classList.add("hidden");
+
+        // Show the last visited section
+        document.getElementById(lastVisitedSection).classList.remove("hidden");
+
+        updateSidebarPermissions(currentUser.role);
+        setupRoleDropdown(currentUser.role);
+    }
+};
+
+// **Step 1: Setup Role Dropdown Based on User**
+async function setupRoleDropdown(role) {
+    try {
+        const roleDropdown = document.getElementById("emailRole");
+        roleDropdown.innerHTML = `<option value="" disabled selected></option>`;
+
+        if (role === "Investigator") {
+            addOption(roleDropdown, "ForensicAnalyst", "Forensic Analyst");
+            addOption(roleDropdown, "StegoAnalyst", "Stego Analyst");
+        } else if (role === "ForensicAnalyst" || role === "StegoAnalyst") {
+            addOption(roleDropdown, "Investigator", "Investigator");
+        }
+    } catch (error) {
+        console.error("Error setting up role dropdown:", error);
+    }
+}
+
+// **Step 2: Populate Receiver Dropdown When Role Changes**
+async function populateReceiverDropdown() {
+    try {
+        const selectedRole = document.getElementById("emailRole").value;
+        if (!selectedRole) return;
+
+        const users = await userContract.methods.viewRegisteredUsers().call();
+        let filteredUsers = users.filter(user => user.role === selectedRole);
+        let uniqueEmails = [...new Set(filteredUsers.map(user => user.email))];
+
+        const receiverDropdown = document.getElementById("receiverEmail");
+        receiverDropdown.innerHTML = `<option value="" disabled selected></option>`;
+
+        uniqueEmails.forEach(email => addOption(receiverDropdown, email, email));
+    } catch (error) {
+        console.error("Error fetching registered users:", error);
+    }
+}
+
+// **Step 3: Send Email**
+async function sendEmail() {
+    let sender = document.getElementById("senderEmail").value;
+    let receiver = document.getElementById("receiverEmail").value;
+    let subject = document.getElementById("emailSubject").value;
+    let body = document.getElementById("emailBody").value;
+
+    if (!receiver || !subject || !body) return alert("All fields are required");
+
+    try {
+        let accounts = await web3.eth.getAccounts();
+        await mailContract.methods.sendMail(sender, receiver, subject, body).send({ from: accounts[0], gas: 1000000 });
+        alert("Email sent successfully!");
+    } catch (error) {
+        console.error("Error sending email:", error);
+        alert("Failed to send email.");
+    }
+}
+
+// **Helper Function to Add Options to Dropdowns**
+function addOption(selectElement, value, text) {
+    let option = document.createElement("option");
+    option.value = value;
+    option.textContent = text;
+    selectElement.appendChild(option);
+}
+
+// Attach Event Listener for Role Change
+document.getElementById("emailRole").addEventListener("change", populateReceiverDropdown);
+
+let suspects = [];
+    let devices = [];
+    function addSuspectDevice(button) {
+    let container = document.getElementById("suspectDeviceContainer");
+    let wrappers = document.querySelectorAll(".suspect-device-wrapper .add-btn");
+    
+    // Hide all previous add buttons
+    wrappers.forEach(btn => btn.style.display = "none");
+
+    // Create new wrapper
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("suspect-device-wrapper");
+    wrapper.style.display = "flex";
+    wrapper.style.alignItems = "center";
+
+    // Create inner div to hold only input fields
+    let inputContainer = document.createElement("div");
+    inputContainer.style.display = "flex";
+    inputContainer.style.gap = "55px"; // Apply gap only to input fields
+    // Create suspect input field
+    let suspectGroup = document.createElement("div");
+    suspectGroup.classList.add("form-groups");
+    let suspectInput = document.createElement("input");
+    suspectInput.type = "text";
+    suspectInput.classList.add("suspect");
+    suspectInput.placeholder = " ";
+    suspectInput.style.width ="320px"; // Set same width as first
+    let suspectLabel = document.createElement("label");
+    suspectLabel.innerText = "Enter suspect name";
+    suspectGroup.appendChild(suspectInput);
+    suspectGroup.appendChild(suspectLabel);
+
+    // Create device input field
+    let deviceGroup = document.createElement("div");
+    deviceGroup.classList.add("form-groups");
+    let deviceInput = document.createElement("input");
+    deviceInput.type = "text";
+    deviceInput.classList.add("digitalDevice");
+    deviceInput.placeholder = " ";
+    deviceInput.style.width =  "320px"; // Set same width as first
+    let deviceLabel = document.createElement("label");
+    deviceLabel.innerText = "Enter device name";
+    deviceGroup.appendChild(deviceInput);
+    deviceGroup.appendChild(deviceLabel);
+
+    // Add input fields to the input container
+    inputContainer.appendChild(suspectGroup);
+    inputContainer.appendChild(deviceGroup);
+
+    // Add button
+    let addBtn = document.createElement("button");
+    addBtn.innerHTML = "➕";
+    addBtn.classList.add("add-btn");
+    addBtn.onclick = function() { addSuspectDevice(this); };
+
+    // Remove button
+    let removeBtn = document.createElement("button");
+    removeBtn.innerHTML = "❌";
+    removeBtn.classList.add("remove-btn");
+    removeBtn.onclick = function() {
+        wrapper.remove();
+        let buttons = document.querySelectorAll(".suspect-device-wrapper .add-btn");
+        if (buttons.length > 0) {
+            buttons[buttons.length - 1].style.display = "inline-block";
+        }
+    };
+
+    // Append elements
+    wrapper.appendChild(inputContainer); // Input fields with gap
+    wrapper.appendChild(addBtn);
+    wrapper.appendChild(removeBtn);
+    container.appendChild(wrapper);
+}
+
+
+// Function to register case
+async function registerCase() {
+    const caseId = document.getElementById("caseId").value;
+    const title = document.getElementById("caseTitle").value;
+    const description = document.getElementById("description").value;
+    const investigator = document.getElementById("investigator").value;
+    const timestamp = getCurrentTimestamp(); // Get the current timestamp
+
+    // Collect all suspect values
+    suspects = [...document.querySelectorAll(".suspect")].map(input => input.value).filter(val => val !== "");
+    devices = [...document.querySelectorAll(".digitalDevice")].map(input => input.value).filter(val => val !== "");
+
+    // Convert arrays to pipe-separated strings
+    const suspectStr = suspects.join(" | ");
+    const deviceStr = devices.join(" | ");
+
+    // Fetch all existing cases
+    let cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (caseExists) {
+        alert("Case ID already exists!");
+        return;
+    }
+
+    // Check if any field is empty
+    if (!caseId || !title || !description || !investigator) {
+        alert("All Fields are required");
+        return;
+    }
+
+    accounts = await web3.eth.getAccounts();
+    await casecontract.methods.newCase(caseId, title, description, investigator, suspectStr, deviceStr, timestamp)
+        .send({ from: accounts[0], gas: 1000000 });
+
+    alert("Case Registered Successfully!");
+}
+
+async function viewCase() { 
+  const caseContainer = document.getElementById("caseContainer");
+    const caseDetailsDiv = document.getElementById("caseDetails");
+    
+    // Hide container initially
+    caseContainer.classList.add("hidden");
+    caseDetailsDiv.innerHTML = ""; // Clear previous content
+
+    const caseId = document.getElementById("viewCaseId").value.trim();
+    if (!caseId) {
+        alert("Please enter a Case ID!");
+        return;
+    }
+
+    let cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (!caseExists) {
+        alert("Case ID does not exist!");
+        return;
+    }
+
+    // Fetch case details
+    const caseDetails = await casecontract.methods.viewCase(caseId).call();
+
+    // Proceed only if case details exist
+    if (!caseDetails) {
+        alert("Case details not found!");
+        return;
+    }
+
+    // Now, show the container
+    caseContainer.classList.remove("hidden");
+
+    // Extract individual fields
+    const suspects = caseDetails.suspect ? caseDetails.suspect.split(" | ") : [];
+    const devices = caseDetails.digitalDevice ? caseDetails.digitalDevice.split(" | ") : [];
+    const faResults = caseDetails.FA_Results ? caseDetails.FA_Results.split(" | ") : [];
+    const saResults = caseDetails.SA_Results ? caseDetails.SA_Results.split(" | ") : [];
+
+    // Ensure all arrays have the same length
+    const maxLength = Math.max(suspects.length, devices.length, faResults.length, saResults.length);
+    while (suspects.length < maxLength) suspects.push("N/A");
+    while (devices.length < maxLength) devices.push("N/A");
+    while (faResults.length < maxLength) faResults.push("N/A");
+    while (saResults.length < maxLength) saResults.push("N/A");
+
+    const suspect = caseDetails.suspect ? caseDetails.suspect.replace(/\s*\|\s*/g, ", ") : "N/A";
+    const device = caseDetails.digitalDevice ? caseDetails.digitalDevice.replace(/\s*\|\s*/g, ", ") : "N/A";
+
+    let structuredResults = `
+   
+    <h3 style="text-align:center;color:black;font-size:36px">Final Case Report</h3>
+        <hr> 
+        ${caseDetails.newCaseTime && caseDetails.newCaseTime !== "N/A" ? `<p style="text-align:right;"><strong>Time:</strong> ${caseDetails.newCaseTime}</p>` : ""}
+        <div style="text-align:left;">
+            <p><strong>ID:</strong> ${caseDetails.caseId}</p>
+            <p><strong>Title:</strong> ${caseDetails.caseTitle}</p>
+            <p><strong>Description:</strong> ${caseDetails.description}</p>
+            <p><strong>Investigator:</strong> ${caseDetails.investigator}</p>
+            <p><strong>Suspect(s):</strong> ${suspect}</p>
+            <p><strong>Device(s):</strong> ${device}</p>
+            <p><strong>Status:</strong> ${["Open", "Investigating", "Closed"][caseDetails.status]}</p>
+        </div>
+        <hr>
+    `;
+
+    // Forensic Results
+   // Forensic Results
+const hasFAResults = faResults.some(result => result !== "N/A");
+
+structuredResults += `
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="text-align:left; margin: 0;"><u><b>Forensic Results</b></u></h3>
+        ${caseDetails.forensicUpdateTime && caseDetails.forensicUpdateTime !== "N/A" 
+            ? `<p style="text-align:right; margin: 0;"><strong>Time:</strong> ${caseDetails.forensicUpdateTime}</p>` 
+            : ""}
+    </div>
+`;
+
+if (hasFAResults) {
+    structuredResults += `
+        <div style="text-align:left;">
+            <p><strong>Forensic Analyst:</strong> ${caseDetails.forensicAnalyst || "Not updated"}</p>
+            <p><strong>Forensic Analyst Result(s):</strong></p>
+        </div>
+    `;
+    faResults.forEach(result => {
+        structuredResults += `<p style="text-align:left;"> ${result}</p>`;
+    });
+} else {
+    structuredResults += `<p style="text-align:left;">No Results Found</p>`;
+}
+
+structuredResults += `<hr><br>`;
+
+
+    // Stego Results
+    const hasSAResults = saResults.some(result => result !== "N/A");
+
+structuredResults += `
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="text-align:left; margin: 0;"><u>Stego Results</u></h3>
+        ${caseDetails.stegoUpdateTime && caseDetails.stegoUpdateTime !== "N/A" 
+            ? `<p style="text-align:right; margin: 0;"><strong>Time:</strong> ${caseDetails.stegoUpdateTime}</p>` 
+            : ""}
+    </div>
+`;
+
+if (hasSAResults) {
+    structuredResults += `
+        <div style="text-align:left;">
+            <p><strong>Stego Analyst:</strong> ${caseDetails.stegoAnalyst || "Not updated"}</p>
+            <p><strong>Stego Analyst Result(s):</strong></p>
+        </div>
+    `;
+    saResults.forEach(result => {
+        structuredResults += `<p style="text-align:left;">${result}</p>`;
+    });
+} else {
+    structuredResults += `<p style="text-align:left;">No Results Found</p>`;
+}
+
+structuredResults += `<hr><br>`;
+
+
+    // Analysis Summary Table
+    structuredResults += `
+        <h3 style="text-align:center;">Analysis Summary</h3>
+        <table border="1" style="width:100%; text-align:left; border-collapse:collapse;">
+            <tr>
+                <th>Suspect</th>
+                <th>Device</th>
+                <th>FA Results</th>
+                <th>SA Results</th>
+            </tr>
+    `;
+
+    for (let i = 0; i < maxLength; i++) {
+        structuredResults += `
+            <tr>
+                <td>${suspects[i] !== "N/A" ? suspects[i] : "No Data"}</td>
+                <td>${devices[i] !== "N/A" ? devices[i] : "No Data"}</td>
+                <td>${faResults[i] !== "N/A" ? faResults[i] : "No Results Found"}</td>
+                <td>${saResults[i] !== "N/A" ? saResults[i] : "No Results Found"}</td>
+            </tr>
+        `;
+    }
+
+    structuredResults += `</table><br><hr><br>`;
+
+    // Final Report
+    structuredResults += `
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="text-align:left; margin: 0;"><u>Final Results</u></h3>
+        ${caseDetails.closeCaseTime && caseDetails.closeCaseTime !== "N/A" 
+            ? `<p style="text-align:right; margin: 0;"><strong>Time:</strong> ${caseDetails.closeCaseTime}</p>` 
+            : ""}
+    </div>
+`;
+
+if (caseDetails.report && caseDetails.report !== "N/A") {
+    structuredResults += `
+        <p style="text-align:left;"><strong>Results:</strong> ${caseDetails.report}</p>
+    `;
+} else {
+    structuredResults += `<p style="text-align:left;">No Results Found</p>`;
+}
+
+
+    // Display the formatted case details
+    document.getElementById("caseDetails").innerHTML = structuredResults;
+}
+
+
+
+async function fetchCaseForForensic() { 
+    const caseId = document.getElementById("forensicCaseId").value;
+    if (!caseId) {
+        alert("Please enter a Case ID!");
+        return;
+    }
+
+    // Fetch case details from the blockchain
+    const caseDetails = await casecontract.methods.viewCase(caseId).call();
+
+    // Extract suspects and devices
+    const suspects = caseDetails.suspect ? caseDetails.suspect.split(" | ") : [];
+    const devices = caseDetails.digitalDevice ? caseDetails.digitalDevice.split(" | ") : [];
+
+    // Get the container where input fields will be displayed
+    let resultsContainer = document.getElementById("forensicResultsContainer");
+    resultsContainer.innerHTML = ""; // Clear previous entries
+
+    // Create a wrapper for the labels and inputs
+    let headerWrapper = document.createElement("div");
+    headerWrapper.classList.add("labels-wrapper");
+
+    // Create a label for each section
+    const labels = ['Suspects', 'Devices', 'FA Results'];
+    labels.forEach(labelText => {
+        let label = document.createElement("div");
+        label.classList.add("label-item");
+        label.textContent = labelText;
+        headerWrapper.appendChild(label);
+    });
+
+    // Append the labels wrapper to the results container
+    resultsContainer.appendChild(headerWrapper);
+
+    // Loop through suspects, devices, and FA Results to create input fields
+    for (let i = 0; i < suspects.length; i++) {
+        let wrapper = document.createElement("div");
+        wrapper.classList.add("forensic-result-row");
+
+        let suspectInput = document.createElement("input");
+        suspectInput.type = "text";
+        suspectInput.value = suspects[i];
+        suspectInput.readOnly = true;
+        suspectInput.classList.add("suspect-field");
+
+        let deviceInput = document.createElement("input");
+        deviceInput.type = "text";
+        deviceInput.value = devices[i] || "N/A";
+        deviceInput.readOnly = true;
+        deviceInput.classList.add("device-field");
+
+        let resultInput = document.createElement("textarea");
+        resultInput.placeholder = "Enter FA Results";
+        resultInput.classList.add("fa-result");
+        resultInput.rows = 2; // Set default height
+        resultInput.style.resize = "vertical"; // Allow vertical resizing
+
+        // Add the fields to the wrapper
+        wrapper.appendChild(suspectInput);
+        wrapper.appendChild(deviceInput);
+        wrapper.appendChild(resultInput);
+        resultsContainer.appendChild(wrapper);
+    }
+}
+
+
+async function updateCaseForensic() {
+    const caseId = document.getElementById("forensicCaseId").value;
+    const analyst = document.getElementById("forensicAnalyst").value;
+    const timestamp = getCurrentTimestamp(); // Get the current timestamp
+    if (!caseId || !analyst) {
+        alert("Please enter Case ID and Analyst Name!");
+        return;
+    }
+    let cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (!caseExists) {
+        alert("Case ID Not exists!");
+        return;
+    }
+
+    // Collect results from dynamically added fields
+    let resultInputs = document.querySelectorAll(".fa-result");
+    let results = [...resultInputs].map(input => input.value.trim()).filter(val => val !== "");
+
+    if (results.length === 0) {
+        alert("Please enter results for at least one suspect!");
+        return;
+    }
+
+    // Convert results to a single '|' separated string
+    const resultsStr = results.join(" | ");
+    let accounts = await web3.eth.getAccounts();
+    await casecontract.methods.updateCaseByForensic(caseId, analyst, resultsStr,timestamp)
+        .send({ from: accounts[0], gas: 1000000 });
+
+    alert("The case has been updated with Forensic Analyst results!");
+}
+async function fetchCaseForStego() { 
+    const caseId = document.getElementById("stegoCaseId").value;
+    if (!caseId) {
+        alert("Please enter a Case ID!");
+        return;
+    }
+
+    // Fetch case details from the blockchain
+    const caseDetails = await casecontract.methods.viewCase(caseId).call();
+
+    // Extract suspects, devices, and FA_Results
+    const suspects = caseDetails.suspect ? caseDetails.suspect.split(" | ") : [];
+    const devices = caseDetails.digitalDevice ? caseDetails.digitalDevice.split(" | ") : [];
+    const faResults = caseDetails.FA_Results ? caseDetails.FA_Results.split(" | ") : []; // FA Results
+
+    // Get the container where input fields will be displayed
+    let resultsContainer = document.getElementById("stegoResultsContainer");
+    resultsContainer.innerHTML = ""; // Clear previous entries
+
+    // Create a wrapper for the labels and inputs
+    let headerWrapper = document.createElement("div");
+    headerWrapper.classList.add("labels-wrapper");
+
+    // Create a label for each section
+    const labels = ['Suspects', 'Devices', 'FA Results', 'Stego Results'];
+    labels.forEach(labelText => {
+        let label = document.createElement("div");
+        label.classList.add("label-item");
+        label.textContent = labelText;
+        headerWrapper.appendChild(label);
+    });
+
+    // Append the labels wrapper to the results container
+    resultsContainer.appendChild(headerWrapper);
+
+    // Loop through suspects, devices, and FA Results to create input fields
+    for (let i = 0; i < suspects.length; i++) {
+        let wrapper = document.createElement("div");
+        wrapper.classList.add("stego-result-row");
+
+        let suspectInput = document.createElement("input");
+        suspectInput.type = "text";
+        suspectInput.value = suspects[i];
+        suspectInput.readOnly = true;
+        suspectInput.classList.add("suspect-field");
+
+        let deviceInput = document.createElement("input");
+        deviceInput.type = "text";
+        deviceInput.value = devices[i] || "N/A";
+        deviceInput.readOnly = true;
+        deviceInput.classList.add("device-field");
+
+        let faResultInput = document.createElement("input");
+        faResultInput.type = "text";
+        faResultInput.value = faResults[i] || "Pending";
+        faResultInput.readOnly = true;
+        faResultInput.classList.add("fa-result");
+
+        let stegoResultTextarea = document.createElement("textarea");
+        stegoResultTextarea.placeholder = "Enter Stego Results";
+        stegoResultTextarea.classList.add("stego-result");
+        stegoResultTextarea.rows = 2; // Set default height
+        stegoResultTextarea.style.resize = "vertical"; // Allow vertical resizing
+
+        // Add the fields to the wrapper
+        wrapper.appendChild(suspectInput);
+        wrapper.appendChild(deviceInput);
+        wrapper.appendChild(faResultInput);
+        wrapper.appendChild(stegoResultTextarea);
+        resultsContainer.appendChild(wrapper);
+    }
+}
+
+
+async function updateCaseStego() {
+    const caseId = document.getElementById("stegoCaseId").value;
+    const analyst = document.getElementById("stegoAnalyst").value;
+    const timestamp = getCurrentTimestamp(); // Get the current timestamp
+    if (!caseId || !analyst) {
+        alert("Please enter Case ID and Analyst Name!");
+        return;
+    }
+    let cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (!caseExists) {
+        alert("Case ID Not exists!");
+        return;
+    }
+
+    // Collect Stego_Results from dynamically added fields
+    let resultInputs = document.querySelectorAll(".stego-result");
+    let results = [...resultInputs].map(input => input.value.trim()).filter(val => val !== "");
+
+    if (results.length === 0) {
+        alert("Please enter results for at least one suspect!");
+        return;
+    }
+
+    // Convert results to a single '|' separated string
+    const resultsStr = results.join(" | ");
+    let accounts = await web3.eth.getAccounts();
+    await casecontract.methods.updateCaseByStego(caseId, analyst, resultsStr,timestamp)
+        .send({ from: accounts[0], gas: 1000000 });
+
+    alert("The case has been updated with Stego Analyst results!");
+}
+
+
+        async function closeCase() {
+            const caseId = document.getElementById("closeCaseId").value;
+            const report = document.getElementById("report").value;
+            const timestamp = getCurrentTimestamp(); // Get the current timestamp
+            let cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (!caseExists) {
+        alert("Case ID Not exists!");
+        return;
+    }
+            let accounts = await web3.eth.getAccounts();
+            await casecontract.methods.closeCase(caseId, report,timestamp)
+                .send({ from: accounts[0], gas: 1000000 });
+
+            alert("Case Closed Successfully!");
+        }
+     
+        async function viewAllCases() {
+    try {
+        const allCases = await casecontract.methods.viewAllCases().call();
+        let output = `
+            <table border="1" class="cases-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Case ID</th>
+                        <th>Title</th>
+                        <th>Investigator</th>
+                        <th>Status</th>
+                        <th>Evidence</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        if (allCases.length === 0) {
+            output += `<tr><td colspan="7">No cases found.</td></tr>`;
+        } else {
+            allCases.forEach((caseDetails, index) => {
+                output += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${caseDetails.caseId}</td>
+                        <td>${caseDetails.caseTitle}</td>
+                        <td>${caseDetails.investigator}</td>
+                        <td>${["Open", "Investigating", "Closed"][caseDetails.status]}</td>
+                       <td><button onclick="handleEvidence('${caseDetails.caseId}')">Evidence</button></td>
+<td><button onclick="handleView('${caseDetails.caseId}')">View</button></td>
+             </tr>
+                `;
+            });
+        }
+
+        output += `</tbody></table>`;
+        document.getElementById("allCases").innerHTML = output;
+    } catch (error) {
+        console.error("Error fetching cases:", error);
+        document.getElementById("allCases").innerHTML = "<p>Error loading cases. Please try again.</p>";
+    }
+}
+
+async function handleView(caseId) { 
+    try {
+        const caseContainer = document.getElementById("caseContainer");
+        const caseDetailsDiv = document.getElementById("caseDetails");
+
+        document.getElementById("allCases").style.display = "none"; 
+        document.getElementById("viewAllCasesForm").style.display = "none"; 
+
+        // Hide container initially and clear previous content
+        caseContainer.classList.add("hidden");
+        caseDetailsDiv.innerHTML = "";
+
+        // Validate Case ID
+        if (!caseId || caseId.trim() === "") {
+            alert("⚠️Please enter a valid Case ID!");
+            return;
+        }
+
+        // Fetch all cases
+        const cases = await casecontract.methods.viewAllCases().call();
+        const caseExists = cases.some(c => c.caseId === caseId);
+        
+        if (!caseExists) {
+            alert("⚠️Case ID does not exist!");
+            return;
+        }
+
+        // Fetch case details
+        const caseDetails = await casecontract.methods.viewCase(caseId).call();
+        if (!caseDetails) {
+            alert("⚠️Case details not found!");
+            return;
+        }
+
+        // Show the container
+        caseContainer.classList.remove("hidden");
+
+        // Extract and process case details
+        const suspects = caseDetails.suspect ? caseDetails.suspect.split(" | ") : [];
+        const devices = caseDetails.digitalDevice ? caseDetails.digitalDevice.split(" | ") : [];
+        const faResults = caseDetails.FA_Results ? caseDetails.FA_Results.split(" | ") : [];
+        const saResults = caseDetails.SA_Results ? caseDetails.SA_Results.split(" | ") : [];
+
+        // Ensure all arrays have the same length
+        const maxLength = Math.max(suspects.length, devices.length, faResults.length, saResults.length);
+        while (suspects.length < maxLength) suspects.push("N/A");
+        while (devices.length < maxLength) devices.push("N/A");
+        while (faResults.length < maxLength) faResults.push("N/A");
+        while (saResults.length < maxLength) saResults.push("N/A");
+
+        const suspect = caseDetails.suspect ? caseDetails.suspect.replace(/\s*\|\s*/g, ", ") : "N/A";
+        const device = caseDetails.digitalDevice ? caseDetails.digitalDevice.replace(/\s*\|\s*/g, ", ") : "N/A";
+
+        let structuredResults = `
+            <h3 style="text-align:center;color:black;font-size:36px; margin-bottom: 20px;">Final Case Report</h3>
+            <hr> 
+            ${caseDetails.newCaseTime && caseDetails.newCaseTime !== "N/A" ? `<p style="text-align:right; margin-bottom: 15px;"><strong>Time:</strong> ${caseDetails.newCaseTime}</p>` : ""}
+            <div style="text-align:left; margin-bottom: 20px;">
+                <p style="margin-bottom: 10px;"><strong>ID:</strong> ${caseDetails.caseId}</p>
+                <p style="margin-bottom: 10px;"><strong>Title:</strong> ${caseDetails.caseTitle}</p>
+                <p style="margin-bottom: 10px;"><strong>Description:</strong> ${caseDetails.description}</p>
+                <p style="margin-bottom: 10px;"><strong>Investigator:</strong> ${caseDetails.investigator}</p>
+                <p style="margin-bottom: 10px;"><strong>Suspect(s):</strong> ${suspect}</p>
+                <p style="margin-bottom: 10px;"><strong>Device(s):</strong> ${device}</p>
+                <p style="margin-bottom: 10px;"><strong>Status:</strong> ${["Open", "Investigating", "Closed"][caseDetails.status]}</p>
+            </div>
+            <hr><br>
+        `;
+
+        // **Forensic Results**
+        const hasFAResults = faResults.some(result => result !== "N/A");
+        structuredResults += `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="text-align:left; margin: 0; font-size: 24px;"><u><b>Forensic Results</b></u></h3>
+                ${caseDetails.forensicUpdateTime && caseDetails.forensicUpdateTime !== "N/A" 
+                    ? `<p style="text-align:right; margin: 0;"><strong>Time:</strong> ${caseDetails.forensicUpdateTime}</p>` 
+                    : ""}
+            </div>
+        `;
+
+        if (hasFAResults) {
+            structuredResults += `
+                <div style="text-align:left; margin-bottom: 20px;">
+                    <p style="margin-bottom: 10px;"><strong>Forensic Analyst:</strong> ${caseDetails.forensicAnalyst || "Not updated"}</p>
+                    <p style="margin-bottom: 10px;"><strong>Forensic Analyst Result(s):</strong></p>
+                </div>
+            `;
+            faResults.forEach(result => {
+                structuredResults += `<p style="text-align:left; margin-bottom: 10px;">${result}</p>`;
+            });
+        } else {
+            structuredResults += `<p style="text-align:left; margin-bottom: 10px;">No Results Found</p>`;
+        }
+        structuredResults += `<hr><br>`;
+
+        // **Stego Results**
+        const hasSAResults = saResults.some(result => result !== "N/A");
+        structuredResults += `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="text-align:left; margin: 0; font-size: 24px;"><u>Stego Results</u></h3>
+                ${caseDetails.stegoUpdateTime && caseDetails.stegoUpdateTime !== "N/A" 
+                    ? `<p style="text-align:right; margin: 0;"><strong>Time:</strong> ${caseDetails.stegoUpdateTime}</p>` 
+                    : ""}
+            </div>
+        `;
+
+        if (hasSAResults) {
+            structuredResults += `
+                <div style="text-align:left; margin-bottom: 20px;">
+                    <p style="margin-bottom: 10px;"><strong>Stego Analyst:</strong> ${caseDetails.stegoAnalyst || "Not updated"}</p>
+                    <p style="margin-bottom: 10px;"><strong>Stego Analyst Result(s):</strong></p>
+                </div>
+            `;
+            saResults.forEach(result => {
+                structuredResults += `<p style="text-align:left; margin-bottom: 10px;">${result}</p>`;
+            });
+        } else {
+            structuredResults += `<p style="text-align:left; margin-bottom: 10px;">No Results Found</p>`;
+        }
+        structuredResults += `<hr><br>`;
+
+        // **Analysis Summary Table**
+        structuredResults += `
+            <h3 style="text-align:center; margin-bottom: 20px;">Analysis Summary</h3>
+            <table border="1" style="width:100%; text-align:left; border-collapse:collapse;">
+                <tr>
+                    <th style="padding: 10px;">Suspect</th>
+                    <th style="padding: 10px;">Device</th>
+                    <th style="padding: 10px;">FA Results</th>
+                    <th style="padding: 10px;">SA Results</th>
+                </tr>
+        `;
+
+        for (let i = 0; i < maxLength; i++) {
+            structuredResults += `
+                <tr>
+                    <td style="padding: 10px;">${suspects[i] !== "N/A" ? suspects[i] : "No Data"}</td>
+                    <td style="padding: 10px;">${devices[i] !== "N/A" ? devices[i] : "No Data"}</td>
+                    <td style="padding: 10px;">${faResults[i] !== "N/A" ? faResults[i] : "No Results Found"}</td>
+                    <td style="padding: 10px;">${saResults[i] !== "N/A" ? saResults[i] : "No Results Found"}</td>
+                </tr>
+            `;
+        }
+
+        structuredResults += `</table><br><hr><br>`;
+
+        // **Final Report**
+        structuredResults += `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="text-align:left; margin: 0; font-size: 24px;"><u>Final Results</u></h3>
+                ${caseDetails.closeCaseTime && caseDetails.closeCaseTime !== "N/A" 
+                    ? `<p style="text-align:right; margin: 0;"><strong>Time:</strong> ${caseDetails.closeCaseTime}</p>` 
+                    : ""}
+            </div>
+        `;
+
+        if (caseDetails.report && caseDetails.report !== "N/A") {
+            structuredResults += `<p style="text-align:left; margin-bottom: 20px;"><strong>Summary:</strong> ${caseDetails.report}</p>`;
+        } else {
+            structuredResults += `<p style="text-align:left; margin-bottom: 20px;">No Results Found</p>`;
+        }
+
+        // Add Back Button
+        structuredResults += `
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="goBackToTable()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Back</button>
+            </div>
+        `;
+
+        // **Display the formatted case details**
+        caseDetailsDiv.innerHTML = structuredResults;
+    } catch (error) {
+        console.error("Error fetching case details:", error);
+        alert("❌ An error occurred while fetching the case details. Please try again.");
+    }
+}
+
+
+
+function goBackToTable() {
+    document.getElementById("caseContainer").classList.add("hidden");  // Hide the report
+    document.getElementById("allCases").style.display = "block";       // Show the table again
+    document.getElementById("viewAllCasesForm").style.display = "block"; // Show the view form
+}
+let selectedCaseId = ""; // Store Case ID globally
+
+function handleEvidence(caseId) { 
+    selectedCaseId = caseId; // Store the caseId globally
+
+    document.getElementById("viewAllCasesForm").style.display = "none"; 
+
+    // Hide the cases table and its heading completely
+    document.getElementById("allCases").style.display = "none"; 
+
+    // Show only the updateCaseForm
+    document.getElementById("updateCaseForm").classList.remove("hidden");
+}
+
+
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll(".container").forEach(el => el.classList.add("hidden"));
+
+    // Show the selected section
+    document.getElementById(sectionId).classList.remove("hidden");
+
+    // Only auto-fill Case ID if selectedCaseId is set
+    if (selectedCaseId) {
+        if (sectionId === "update-case-forensic") {
+            document.getElementById("forensicCaseId").value = selectedCaseId;
+        } else if (sectionId === "update-case-stego") {
+            document.getElementById("stegoCaseId").value = selectedCaseId;
+        } else if (sectionId === "close-case") {
+            document.getElementById("closeCaseId").value = selectedCaseId;
+        }
+    } else {
+        // Clear input fields if no case is selected
+        if (sectionId === "update-case-forensic") {
+            document.getElementById("forensicCaseId").value = "";
+        } else if (sectionId === "update-case-stego") {
+            document.getElementById("stegoCaseId").value = "";
+        } else if (sectionId === "close-case") {
+            document.getElementById("closeCaseId").value = "";
+        }
+    }
+}
+
+</script>
+</body>
+</html>
