@@ -24,7 +24,7 @@ To address these challenges, our research work, TraceForensics, integrates foren
 By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<p>
 
 <h2 id="architecture-diagram"> 2. Architecture Diagram</h2>
-<img src="https://github.com/NSharmili/TraceForensics/blob/53195622364f88db92da0555c91affed37b9acf2/Screenshot%202025-04-02%20112840.png?raw=true" 
+<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/6f4b2ddefc2923abf2c5901d7b558977a753a00a/Screenshot%202025-04-11%20113249.png" 
      alt="Architecture Diagram" width="300">
 <p>This diagram illustrates the workflow of TraceForensics, integrating file recovery, steganography detection, and blockchain-based evidence management.</p>
 <p>The proposed blockchain-based cybercrime investigation system comprises four key modules: User Registration, Case Entry, and Evidence Management. It ensures secure, tamper-proof handling of digital evidence and case details by leveraging blockchain’s transparency and immutability.</p>
