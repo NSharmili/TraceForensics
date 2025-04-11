@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Encode Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 850px;
+            padding: 15px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            max-height: 95vh;
+            overflow: hidden;
+        }
+
+        .sub-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .sub-container img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .content-container {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .left-section {
+            text-align: center;
+            width: 30%;
+        }
+
+        .left-section img {
+            width: 220px;
+            height: 140px;
+            margin-bottom: 3px;
+        }
+
+        .divider-vertical {
+            border-left: 2px solid black;
+            height: 180px;
+        }
+
+        .right-section {
+            width: 60%;
+            text-align: center;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            width: 90%;
+            margin: 3px 0;
+        }
+
+        .form-container textarea {
+            height: 70px;
+        }
+
+        .encode-btn {
+            margin: 5px auto;
+            padding: 8px 15px;
+            font-size: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .encode-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .horizontal-line {
+            width: 100%;
+            border-top: 2px solid gainsboro;
+            margin: 8px 0;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 5px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 220px;
+            height: 140px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .download-container {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .logout-container {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .logout-btn {
+            padding: 7px 12px;
+            font-size: 14px;
+            background-color: crimson;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container" id="mainContainer">
+        <div class="sub-container">
+            <img src="{{ url_for('static', filename='images/txt-image.png') }}" alt="Icon">
+            <h2>Text-Based Steganography</h2>
+        </div>
+        <div class="content-container">
+            <div class="left-section">
+                <img src="{{ url_for('static', filename='images/criminal.png') }}" alt="Icon">
+                <p>Securely Hide Messages in Images</p>
+            </div>
+            <div class="divider-vertical"></div>
+            <div class="right-section">
+                <form action="/encode" method="POST" enctype="multipart/form-data" class="form-container">
+                    <input type="file" name="image" required>
+                    <textarea name="message" placeholder="Enter hidden message" required></textarea>
+                    <button type="submit" class="encode-btn">Encode Image</button>
+                </form>
+            </div>
+        </div>
+
+        {% if original and encoded %}
+        <div class="horizontal-line"></div>
+        <div class="image-container">
+            <div>
+                <h4>Cover Image</h4>
+                <img src="{{ url_for('static', filename='uploads/' + original) }}">
+            </div>
+            <div>
+                <h4>Stego Image</h4>
+                <img src="{{ url_for('static', filename='encoded/' + encoded) }}">
+            </div>
+        </div>
+        <div class="download-container">
+            <a href="{{ url_for('static', filename='encoded/' + encoded) }}" download>Download Encoded Image</a>
+        </div>
+        <script>
+            document.getElementById("mainContainer").style.marginTop = "0";
+            document.body.style.overflow = "hidden"; // Prevent scrolling
+        </script>
+        {% endif %}
+<!-- Horizontal Line -->
+<div class="divider"></div>
+
+<!-- Logout Button at the Right Side -->
+<div class="logout-container">
+    <a href="javascript:history.back()">
+        <button class="logout-btn">Go Back</button>
+    </a>
+</div>
+    </div>
+</body>
+</html>
