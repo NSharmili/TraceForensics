@@ -1,0 +1,1984 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain User Management</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.0.3/web3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!--link rel="stylesheet" href="styles.css"-->
+<script src="script.js"></script>
+<style>
+   
+   body, html { margin: 0; padding: 0; }
+.header { background-color: #3a3f51; color: #fff; padding: 10px 0; text-align: center; width: 100%; height: auto; position: fixed; top: 0; left: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; }
+h1 { font-size: 32px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-weight: bold; letter-spacing: 0.1rem; color: white; display: flex; align-items: center; margin: 0; padding: 0; }
+h1 img { width: 70px; height: 70px; margin-right: 0px; border-radius: 50%; border: 3px solid rgb(237, 237, 245); }
+body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; background-image: url('images/background.jpg'); background-size: cover; background-position: center; background-attachment: fixed; height: 100%; margin: 0; }
+.main-content { background-color: #f4f4f4; height: 94.3vh; }
+#workProfileContainer { background-color: #f4f4f4; height: 100%; overflow: hidden; }
+iframe { width: 100%; height: 100%; border: none; overflow: hidden; }
+#dashboardSection { background-color: #f4f4f4; height: 94.3vh; }
+.box { margin: auto; padding: 20px; background: white; box-shadow: 0px 0px 10px gray; border-radius: 10px; margin-top: 90px; }
+.container { margin: auto; padding: 20px; background: white; box-shadow: 0px 0px 10px gray; border-radius: 10px; margin-top: 120px; }
+.casecontainer { margin: auto; padding: 20px; background: white; box-shadow: 0px 0px 10px gray; border-radius: 10px; margin-top: 120px; width: 800px; display: flex; justify-content: center; align-items: center; }
+.panel { margin: auto; padding: 20px; background: white; box-shadow: 0px 0px 10px gray; border-radius: 10px; width: 800px; display: flex; justify-content: center; align-items: center; }
+#viewCaseForm { width: 400px; }
+#caseDetails { width: 100%; text-align: center; }
+#viewMails, #sentMails { width: 800px; }
+#registerSection, #caseForm { width: 600px; }
+#loginSection, #viewCaseForm, #viewMails, #close-case { width: 400px; }
+#myProfile { width: 500px; }
+#update-case-forensic { width: 1000px; }
+#update-case-stego { width: 1200px; }
+#caseForm { width: 800px; }
+#forensicUpdateCase, #stegoUpdateCase { width: 1000px; }
+#emailForm { width: 800px; }
+#viewAllCasesForm { width: 1000px; }
+#viewMails, #sentMails { width: 800px; }
+#investpanel { width: 1200px; }
+.sidebar { width: 200px; background-color: #3a3f51; color: #fff; padding: 15px; position: fixed; height: 100vh; top: 100px; left: 0; display: flex; flex-direction: column; text-align: left; }
+.sidebar button { background-color: #3a3f51; display: flex; align-items: center; gap: 10px; text-align: left; width: 100%; }
+.sidebar i { width: 20px; }
+.sidebar button:hover { background: #828383; }
+.main-content { background-image: none; margin-left: 200px; padding: 20px; background-color: #f4f4f4; flex-grow: 1; overflow-x: hidden; overflow-y: auto; }
+input, button, select, textarea { display: block; width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; }
+button { background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 10px; }
+button:hover { background-color: #0056b3; }
+#useridbtn, #casebtn, #btn { width: 200px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 10px; padding: 10px 20px; font-size: 16px; display: block; margin: 20px auto; text-align: center; transition: background-color 0.3s, transform 0.2s; }
+#useridbtn:hover, #casebtn:hover { background-color: #0056b3; transform: scale(1.05); }
+.link { color: #007bff; cursor: pointer; margin-top: 10px; display: inline-block; }
+.hidden { display: none; }
+.form-row { display: flex; justify-content: space-between; gap: 15px; margin-bottom: -18px; }
+.form-groups { flex: 1; position: relative; margin-bottom: 20px; text-align: left; }
+.form-groups input, .form-groups file, .form-groups textarea { width: 93%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-groups select { width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-groups textarea { height: 250px; resize: vertical; }
+.form-groups label { position: absolute; left: 15px; top: 20px; font-size: 16px; color: #656464; transition: 0.3s; pointer-events: none; }
+.form-groups input:focus + label, .form-groups input:not(:placeholder-shown) + label, .form-groups select:focus + label, .form-groups select.filled + label, .form-groups textarea:focus + label, .form-groups textarea:not(:placeholder-shown) + label, .form-groups file:focus + label, .form-groups file:not(:placeholder-shown) + label { top: -4px; left: 10px; font-size: 13px; color: #007bff; background-color: white; padding: 2px 5px; }
+.form-group { flex: 1; position: relative; margin-bottom: 20px; text-align: left; }
+.form-group input, .form-group file, .form-group select, .form-group textarea { width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-group select { width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.form-group textarea { height: 100px; resize: vertical; }
+.form-group label { position: absolute; left: 15px; top: 12px; font-size: 16px; color: #656464; transition: 0.3s; pointer-events: none; }
+.form-group input:focus + label, .form-group input:not(:placeholder-shown) + label, .form-group select:focus + label, .form-group select.filled + label, .form-group textarea:focus + label, .form-group textarea:not(:placeholder-shown) + label, .form-group file:focus + label, .form-group file:not(:placeholder-shown) + label { top: -10px; left: 10px; font-size: 13px; color: #007bff; background-color: white; padding: 2px 5px; }
+.register-heading { color: #0542f9; margin-top: 10px; font-size: 32px; margin-bottom: 0px; }
+.login-heading { color: #0542f9; margin-top: 10px; font-size: 20px; }
+.icon-container { display: flex; justify-content: center; margin-bottom: 10px; }
+.round-icon { width: 90px; height: 90px; border-radius: 50%; }
+.large-icon { font-size: 120px; color: #333; }
+#viewMails { width: 100%; max-width: 600px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9; overflow: hidden; }
+#mailsList { max-height: 300px; overflow-y: auto; padding: 10px; }
+.mail-item { padding: 10px; cursor: pointer; background: white; border: 1px solid #ccc; margin-bottom: 10px; border-radius: 5px; transition: background 0.3s ease-in-out; }
+.mail-item:hover { background: #e0e0e0; }
+.subject-text { text-align: left; margin: 0; }
+.popup-container { display: none; position: fixed; top: 50%; left: 60%; transform: translate(-50%, -50%); width: 700px; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; }
+.popup-content { background: white; padding: 20px; border-radius: 10px; width: 100%; height: 100%; text-align: left; position: relative; }
+.close-btn { position: absolute; top: 10px; right: 15px; font-size: 20px; cursor: pointer; }
+.suspect-device-wrapper { display: flex; align-items: center; margin-top: -8px; margin-bottom: -8px; }
+.suspect-device-wrapper .form-groups { display: flex; flex-direction: column; position: relative; }
+.add-btn, .remove-btn { background-color: white; height: 40px; width: 40px; display: flex; align-items: center; justify-content: center; font-size: 18px; border: none; cursor: pointer; color: white; border-radius: 5px; margin-top: -10px; }
+.add-btn:hover, .remove-btn:hover { background-color: white; }
+.forensic-result-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; width: 100%; }
+.forensic-result-row input { flex: 1; min-width: 180px; padding: 8px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px; }
+.suspect-field, .device-field { background-color: #f0f0f0; color: #333; font-weight: bold; }
+.fa-result { background-color: white; border: 2px solid #007bff; }
+.stego-result-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; width: 100%; }
+.stego-result-row input, .stego-result { flex: 1; min-width: 180px; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; }
+.suspect-field, .device-field, .fa-result { background-color: #f0f0f0; color: #333; font-weight: bold; }
+.stego-result { background-color: white; border: 2px solid #007bff; min-height: 40px; padding: 6px; }
+.labels-wrapper { display: flex; justify-content: space-around; margin-bottom: 10px; }
+.label-item { flex: 1; text-align: center; font-weight: bold; margin-right: 10px; }
+.stego-result-row { display: flex; justify-content: space-around; margin-bottom: 10px; }
+.stego-result-row input, .stego-result-row textarea { width: 200px; padding: 5px; margin: 0 5px; }
+.popup-container { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60%; max-height: 80vh; overflow: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); z-index: 1001; text-align: left; }
+.popup-container h1, .popup-container h3, .popup-container p { margin: 10px 0; }
+.popup-container span { float: right; }
+.popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); z-index: 1000; display: none; }
+.cases-table { width: 100%; border-collapse: collapse; background-color: #f3f3f3; }
+.cases-table th, .cases-table td { border: 1px solid #000; padding: 10px; text-align: center; background-color: #f3f3f3; }
+.cases-table thead { background-color: #d3d3d3; }
+.sub-container { text-align: center; cursor: pointer; }
+.sub-container img { width: 1000px; height: 1000px; }
+.sub-container p { font-size: 18px; margin-top: 5px; font-weight: bold; }
+.sub-container:hover { background-color: #f0f0f0; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); }
+#emailBody { min-height: 300px; resize: vertical; overflow-y: auto; display: block; }
+.forensic-result-row { display: flex; align-items: center; gap: 5px; width: 100%; }
+.suspect-field, .device-field { min-width: 80px; max-width: 100px; flex: 0 0 auto; padding: 6px; border: 1px solid #ccc; border-radius: 4px; }
+.fa-result, .stego-result { flex: 1; min-width: 200px; max-width: 100%; min-height: 100px; max-height: 200px; overflow-y: auto; padding: 6px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; }
+.labels-wrapper { display: flex; justify-content: space-between; gap: 2px; font-weight: bold; width: 100%; }
+.label-item { flex: 1; text-align: center; font-size: 14px; }
+#forensicResultsContainer { width: 100%; display: flex; justify-content: center; }
+.forensic-table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
+.forensic-table th, .forensic-table td { border: 1px solid #ccc; padding: 10px; vertical-align: top; text-align: left; }
+.forensic-table th { background-color: #f2f2f2; }
+.forensic-table th:nth-child(1), .forensic-table td:nth-child(1) { width: 25%; }
+.forensic-table th:nth-child(2), .forensic-table td:nth-child(2) { width: 25%; }
+.forensic-table th:nth-child(3), .forensic-table td:nth-child(3) { width: 50%; }
+.device-field { width: 100%; border: none; background-color: transparent; outline: none; font-size: 1rem; }
+.fa-result { width: 100%; border: none; background-color: transparent; resize: vertical; outline: none; font-size: 1rem; box-sizing: border-box; }
+.stego-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+.stego-table th, .stego-table td { border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left; }
+.stego-table th { background-color: #f2f2f2; font-weight: bold; }
+.stego-result { width: 100%; outline: none; border: none; background-color: transparent; }
+.folder-cell { font-weight: bold; background-color: transparent; }
+#assignTaskTable table, #forensicAcceptTable table, #stegoAcceptTable table { border-collapse: collapse; width: 100%; }
+#assignTaskTable th, #assignTaskTable td, #forensicAcceptTable th, #forensicAcceptTable td, #stegoAcceptTable th, #stegoAcceptTable td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+#assignTaskTable th, #forensicAcceptTable th, #stegoAcceptTable th { background-color: #f2f2f2; }
+#assignTaskTable input[type="text"], #assignTaskTable select, #forensicAcceptTable input[type="text"], #forensicAcceptTable select, #stegoAcceptTable input[type="text"], #stegoAcceptTable select { width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box; }
+#assignTaskTable button, #forensicAcceptTable button, #stegoAcceptTable button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+#assignTaskTable button:disabled, #forensicAcceptTable button:disabled, #stegoAcceptTable button:disabled { background-color: #ccc; cursor: not-allowed; }
+.user-details { margin-left: 20px; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 500px; text-align: left; }
+.user-details .large-icon { font-size: 125px; color: #022e5f; margin-bottom: 20px; display: block; text-align: center; }
+.user-details p { font-size: 16px; color: #333; margin: 10px 0; display: flex; align-items: center; }
+.user-details strong { width: 120px; color: #222; }
+.user-details span { color: #555; }
+.styled-heading {
+    text-align: center;
+    font-size: 1.5em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.styled-heading .emoji {
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+</style>
+
+</head>
+<body>
+    <!-- Register Section -->
+     <div id="bigbox">
+    <div class="box" id="registerSection">
+        <h2 class="register-heading">Digital Forensics Using Blockchain</h2>
+        <div class="icon-container">
+            <img src="images/img3.png" alt="Project Icon" class="round-icon"> 
+        </div>
+        <h2>Register</h2>
+        <div class="form-row">
+        <div class="form-groups">
+            <input type="text" id="regName" placeholder=" " required>
+            <label for="regName">Name</label>
+        </div>
+        
+        <div class="form-groups">
+            <input type="email" id="regEmail" placeholder=" " required>
+            <label for="regEmail">Email</label>
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-groups">
+            <input type="text" id="regPhone" placeholder=" " required>
+            <label for="regPhone">Phone</label>
+        </div>
+        <div class="form-groups">
+            <select id="regRole" required onchange="updateSelectLabel()">
+                <option value="" disabled selected></option>
+                <!--option value="Suspect">Suspect</option-->
+                <option value="Investigator">Investigator</option>
+                <option value="ForensicAnalyst">Forensic Analyst</option>
+                <option value="StegoAnalyst">Stego Analyst</option>
+            </select>
+            <label for="regRole">Select Role</label>
+        </div>
+        
+        </div>
+        <div class="form-row">
+            <div class="form-groups">
+                <input type="password" id="regPassword" placeholder=" " required>
+                <label for="regPassword">Password</label>
+            </div>
+        <div class="form-groups">
+            <input type="password" id="confirmPassword" placeholder=" " required>
+            <label for="confirmPassword">Confirm Password</label>
+        </div>
+        
+        </div>
+        <button id="useridbtn" onclick="generateUserID()">Generate Unique ID</button>
+
+    <div class="form-group hidden" id="userIDContainer">
+        <input type="text" id="regUserID" placeholder=" " readonly>
+        <label for="regUserID">Unique User ID</label>
+    </div>
+    
+        <button onclick="registerUser()"id="registerBtn"  class="hidden">Register</button>
+        <p class="link" onclick="showLogin()">Already have an account? Login here</p>
+    </div>
+
+     <!-- Login Section -->
+     <div class="box hidden" id="loginSection">
+        <h2 class="login-heading">Digital Forensics Using Blockchain</h2>
+        <div class="icon-container">
+            <img src="images/img3.png" alt="Project Icon" class="round-icon"> 
+        </div>
+        <h2>Login</h2>
+        <div class="form-group">
+            <input type="text" id="loginIdentifier" placeholder=" " required>
+            <label for="loginIdentifier">Email or UserID</label>
+        </div>
+        
+        <div class="form-group">
+            <input type="password" id="loginPassword" placeholder=" " required>
+            <label for="loginPassword">Password</label>
+        </div>
+        <button onclick="loginUser()">Login</button>
+        <p class="link" onclick="showRegister()">Don't have an account? Register here</p>
+    </div>
+  </div>
+   <!-- Dashboard Section -->
+   <div id="dashboardSection" class="hidden">
+    <div class="header">
+        <h1>
+          <span id="headerTitle" class="styled-heading">Traceforensics - Integrating Autopsy With Blockchain For Steganography-Based Evidence Management In Cybercrime Investigations</span>
+        </h1>
+      </div>
+      
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <button data-target="myProfile"><i class="fas fa-user"></i> My Profile</button>
+        <button data-target="workProfile"><i class="fas fa-briefcase"></i> Workboard</button>
+        <button data-target="caseForm"><i class="fas fa-plus-circle"></i> New Case</button>
+        <button data-target="investpanel"><i class="fas fa-network-wired"></i>Case Communication Hub</button>
+        <button data-target="forensicpanel"><i class="fas fa-network-wired"></i>Case Communication Hub</button>
+        <button data-target="stegopanel"><i class="fas fa-network-wired"></i>Case Communication Hub</button>
+        <button data-target="forensicUpdateCase"><i class="fas fa-edit"></i>Forensic Case Update </button>
+        <button data-target="stegoUpdateCase"><i class="fas fa-edit"></i>Stego Case Update</button>
+        <button data-target="viewAllCasesForm"><i class="fas fa-folder-open"></i> View All Cases</button>
+        <button onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+        <div class="main-content" id="mainContent">
+            <div class="container" id="myProfile">
+                <div class="user-details">
+                    <i class="fa-solid fa-user large-icon"></i>
+                    <p><strong>User Name:</strong> <span id="userName"></span></p>
+                    <p><strong>User ID:</strong> <span id="userId"></span></p>
+                    <p><strong>Email:</strong> <span id="userEmail"></span></p>
+                    <p><strong>Role:</strong> <span id="userRole"></span></p>
+                    <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+                  </div>
+                        </div>
+
+              <!-- Case Registration Section -->
+              <div class="container hidden" id="caseForm"> 
+                <h2>Case Registration</h2>
+                <div class="form-row">
+                    <div class="form-groups">
+                        <input type="text" id="caseId" placeholder=" Auto-generated Case ID " readonly>
+                        <label for="caseId">Case ID</label>
+                    </div>
+                    <div class="form-groups">
+                        <input type="text" id="caseTitle" placeholder=" " required>
+                        <label for="caseTitle">Case Title</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea type="text" id="description" placeholder=" " required></textarea>
+                    <label for="description">Description</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="investigator" placeholder=" " readonly>
+                    <label for="investigator">Investigator</label>
+                </div>
+                <div id="suspectDeviceContainer" class="form-groups">
+                  <div class="suspect-device-wrapper" >
+                      <div class="form-groups">
+                          <input type="text" class="suspect" placeholder=" " required style="width: 320px;" >
+                          <label>Enter suspect name</label>
+                      </div>
+                      <div class="form-groups">
+                          <input type="text" class="digitalDevice" placeholder=" " required style="width:320px;" >
+                          <label>Enter device name</label>
+                      </div>
+                      <button type="button" class="add-btn" onclick="addSuspectDevice(this)">➕</button>
+                      <button type="button" class="remove-btn" style="display: none;">❌</button>
+                  </div>
+              </div>
+                <button id= "casebtn" onclick="registerCase()">Submit Case</button>
+            </div>
+            <div class="container hidden" id="investpanel"> 
+            <h2>Investigation Task Assignment & Progress Monitoring</h2>
+            <table id="assignTaskTable">
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>Investigator</th>
+                  <th>Forensic Analyst</th>
+                  <th>Assign Forensic</th>
+                  <th>Forensic Accepted</th>
+                  <th>Forensic Status</th>
+                  <th>Stego Analyst</th>
+                  <th>Assign Stego</th>
+                  <th>Stego Accepted</th>
+                  <th>Stego Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            </div>
+            <div class="container hidden" id="forensicpanel" style=" background-color: #f4f4f4;box-shadow: none;border-radius: 0%;">
+              
+                <h2>Task Management & Status Updates</h2>
+                <div class="panel">
+                <table id="forensicAcceptTable">
+                  <thead>
+                    <tr>
+                      <th>Case ID</th>
+                      <th>Investigator</th>
+                      <th>Forensic Analyst</th>
+                      <th>Forensic Accepted</th>
+                      <th>Forensic Status</th>
+                      <th>Update</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+                </div>
+            </div>
+              <div class="container hidden" id="stegopanel" style=" background-color: #f4f4f4;box-shadow: none;border-radius: 0%;">
+              
+                    <h2>Task Management & Status Updates</h2>
+                    <div class="panel">
+                    <table id="stegoAcceptTable">
+                      <thead>
+                        <tr>
+                          <th>Case ID</th>
+                          <th>Investigator</th>
+                          <th>Stego Analyst</th>
+                          <th>Stego Accepted</th>
+                          <th>Stego Status</th>
+                          <th>Update</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                </div>
+                </div>
+
+
+
+<div class="container hidden" id="forensicUpdateCase">   
+    <h2>Update Case by ForensicAnalyst</h2>
+  <div class="form-row">
+    <div class="form-groups">
+      <input type="text" id="forensicCaseId" placeholder=" " required>
+      <label for="forensicCaseId">Case ID:</label>
+    </div>
+  
+    <div class="form-groups">
+      <input type="text" id="forensicAnalyst" placeholder=" " readonly>
+      <label for="forensicAnalyst">Analyst Name:</label>
+    </div>
+  </div> 
+    <div id="forensicResultsContainer" style="margin-top: 20px;"></div>
+
+  
+    <button id="btn" onclick="updateCaseForensic()">Update Case</button>
+  </div>
+  
+          <div class="container hidden" id="stegoUpdateCase">  
+            <h2>Update Case by StegoAnalyst</h2>
+            <div class="form-row">
+            <div class="form-groups">
+              <input type="text" id="stegoCaseId" placeholder=" " required>
+              <label for="stegoCaseId">Case ID:</label>
+            </div>
+            <div class="form-groups">
+              <input type="text" id="stegoAnalyst" placeholder=" " readonly>
+              <label for="stegoAnalyst">Analyst Name:</label>
+            </div>
+            </div>
+            <div id="stegoResultsContainer"></div>
+            <button id="btn" onclick="updateCaseStego()">Update Case</button>
+        </div>
+          
+<section id="close-case" class="container hidden">
+  <h2>Close Case</h2>
+  <div class="form-group">
+    <input type="text" id="closeCaseId" placeholder=" " readonly>
+    <label for="closeCaseId">Case ID:</label>
+</div>
+<div class="form-group">
+  <textarea id="report" placeholder=" " required></textarea>
+  <label for="report">Summary</label>
+</div>
+  <button onclick="closeCase()">Close</button>
+</section>
+            <!-- View Case -->
+            <!-- View Case Form -->
+<div class="container hidden" id="viewCaseForm">
+  <h2>View Case</h2>
+  <div class="form-group">
+    <input type="text" id="viewCaseId" placeholder=" " required>
+    <label for="viewCaseId">Case ID</label>
+  </div>
+  <button onclick="viewCase()">View</button>
+</div>
+
+<!-- Case Details Container -->
+<div class="casecontainer hidden" id="caseContainer">
+  <div id="caseDetails"></div>
+</div>
+            <!-- View All Cases -->
+            <div class="container hidden" id="viewAllCasesForm">
+              <h2>All Cases</h2>
+              <div id="allCases"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelector(".sidebar").addEventListener("click", function (e) {   
+    loadCases();     
+    if (e.target.tagName === "BUTTON") {                         
+        const targetId = e.target.dataset.target;         
+        selectedCaseId = "";                  
+
+        // Hide all sections dynamically         
+        document.querySelectorAll(".container, .casecontainer").forEach(el => el.classList.add("hidden"));          
+
+        // Hide viewAllCasesForm and allCases table initially         
+        document.getElementById("viewAllCasesForm").style.display = "none";         
+        document.getElementById("allCases").style.display = "none";  
+
+        // Ensure workProfileContainer is hidden when clicking another sidebar button
+        document.getElementById("workProfileContainer")?.classList.add("hidden");
+
+        if (targetId === "viewAllCasesForm") {             
+            viewAllCases();              
+            document.getElementById("caseContainer").classList.add("hidden");               
+            document.getElementById("allCases").style.display = "block";                    
+            document.getElementById("viewAllCasesForm").style.display = "block";           
+        } else if (targetId === "workProfile") {             
+            const role = document.getElementById("userRole").innerText.trim();             
+            const rolePages = {                 
+                "Suspect": "suspect.html",                 
+                "Investigator": "CaseRegistration.html",                 
+                "ForensicAnalyst": "autopsy.html",                 
+                "StegoAnalyst": "http://127.0.0.1:5000/decode",                 
+                "HigherAuthority": "CaseDetails.html"             
+            };              
+
+            if (rolePages[role]) {     
+                let workProfileDiv = document.getElementById("workProfileContainer");     
+                if (!workProfileDiv) {         
+                    workProfileDiv = document.createElement("div");         
+                    workProfileDiv.id = "workProfileContainer";         
+                    workProfileDiv.style.width = "100%";         
+                    workProfileDiv.style.height = "100%";         
+                    workProfileDiv.style.overflow = "hidden"; // Prevent scrolling in the div         
+                    workProfileDiv.innerHTML = `<iframe src="${rolePages[role]}" width="100%" height="100%" style="border: none; margin: 0px;margin-top:70px; overflow: hidden;" scrolling="auto"></iframe>`;         
+                    document.getElementById("mainContent").appendChild(workProfileDiv);     
+                }                  
+                workProfileDiv.classList.remove("hidden");             
+            } else {                 
+                document.getElementById("mainContent").innerHTML = `<h2>No profile page assigned for this role.</h2>`;             
+            }         
+        } else {             
+            const workProfileDiv = document.getElementById("workProfileContainer");             
+            if (workProfileDiv) workProfileDiv.classList.add("hidden");              
+
+            document.getElementById(targetId).classList.remove("hidden");         
+        }     
+    } 
+});
+
+
+
+
+// Automatically call fetchCaseForForensic when a Case ID is entered for forensic
+document.getElementById('forensicCaseId').addEventListener('input', function() {
+    const caseId = this.value.trim();
+    if (caseId.length ==7) {
+        fetchCaseForForensic();  // Automatically fetch case details when Case ID is entered
+    }
+});
+
+// Automatically call fetchCaseForStego when a Case ID is entered for stego
+document.getElementById('stegoCaseId').addEventListener('input', function() {
+    const caseId = this.value.trim();
+    if (caseId.length ==7) {
+        fetchCaseForStego();  // Automatically fetch case details when Case ID is entered
+    }
+});
+
+  // Role-based permissions for the sidebar
+  const rolePermissions = {
+    "Investigator": ["myProfile", "caseForm", "viewAllCasesForm", "investpanel","logout"],
+    "ForensicAnalyst": ["myProfile","workProfile","forensicpanel","forensicUpdateCase", "logout"],
+    "StegoAnalyst": ["myProfile","workProfile","stegopanel", "stegoUpdateCase", "logout"],
+  };
+  function showSection(sectionId) {
+  // Hide the main form container
+  document.getElementById("updateCaseForm").classList.add("hidden");
+
+  // Hide all sections
+  document.getElementById("update-case-forensic").classList.add("hidden");
+  document.getElementById("update-case-stego").classList.add("hidden");
+  document.getElementById("close-case").classList.add("hidden");
+
+  // Show the selected section
+  document.getElementById(sectionId).classList.remove("hidden");
+}
+
+
+  function showLogin() {
+    document.getElementById("registerSection").classList.add("hidden");
+    document.getElementById("loginSection").classList.remove("hidden");
+}
+
+function showRegister() {
+    document.getElementById("loginSection").classList.add("hidden");
+    document.getElementById("registerSection").classList.remove("hidden");
+}
+
+function updateSelectLabel() {
+    const selectFields = ["regRole", "status", "emailRole", "receiverEmail"];
+
+    selectFields.forEach(id => {
+        const selectField = document.getElementById(id);
+        if (selectField) {
+            selectField.classList.toggle("filled", !!selectField.value);
+        }
+    });
+}
+
+
+
+
+async function generateUserID() {
+    const email = document.getElementById("regEmail").value;
+    const phone = document.getElementById("regPhone").value;
+
+    if (!email || !phone) {
+        alert( "Email and phone are required to generate a user ID.");
+        return;
+    }
+     // Validate email format using regex
+     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+        alert("⚠️Please enter a valid email address!");
+        return;
+    }
+
+    // Validate phone number format using regex (assumes phone starts with 9, 8, 7, or 6 and is 10 digits long)
+    const phonePattern = /^[6789]\d{9}$/;
+    if (!phonePattern.test(phone)) {
+        alert("⚠️Please enter a valid phone number starting with 9, 8, 7, or 6 and 10 digits long.");
+        return;
+    }
+
+
+    try {
+        const users = await userContract.methods.viewRegisteredUsers().call();
+
+        if (users.some(u => u.email === email || u.phone === phone)) {
+            alert( "Email or phone already exists. Please use a different one.");
+            return;
+        }
+
+        const userID = "0x" + web3.utils.keccak256(email + phone).substring(2, 42);
+        document.getElementById('regUserID').value = userID;
+        document.getElementById('userIDContainer').classList.remove('hidden');
+        document.getElementById("registerBtn").classList.remove("hidden");
+
+    } catch (error) {
+        alert( "❌Error checking user existence. Please try again.");
+    }
+}
+
+
+function getCurrentTimestamp() {
+    const now = new Date();
+    return now.getFullYear() + '-' + 
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0') + ' ' +
+        String(now.getHours()).padStart(2, '0') + ':' +
+        String(now.getMinutes()).padStart(2, '0') + ':' +
+        String(now.getSeconds()).padStart(2, '0') + '.' +
+        String(now.getMilliseconds()).padStart(3, '0');
+}
+async function registerUser() {
+    let name = document.getElementById("regName").value;
+    let email = document.getElementById("regEmail").value;
+    let phone = document.getElementById("regPhone").value;
+    let password = document.getElementById("regPassword").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let role = document.getElementById("regRole").value;
+
+    const timestamp = getCurrentTimestamp();
+    const userID = "0x" + web3.utils.keccak256(email + phone).substring(2, 42);
+
+    if (!name || !email || !phone || !password || !role) {
+        alert("⚠️All fields are required!");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("⚠️Passwords do not match!");
+        return;
+    }
+
+        let accounts = await web3.eth.getAccounts();
+        await userContract.methods
+            .registerUser(userID, name, email, phone, password, role, timestamp)
+            .send({ from: accounts[0], gas: 1000000 });
+
+        alert("✅Registration Successful! Please log in.");
+
+       
+        showLogin();
+ 
+}
+
+
+async function loginUser() {
+  let identifier = document.getElementById("loginIdentifier").value;
+  let password = document.getElementById("loginPassword").value;
+
+  if (!identifier || !password) {
+      alert("All fields are required!");
+      return;
+  }
+
+  try {
+      let users = await userContract.methods.viewRegisteredUsers().call();
+      const userData = users.find(u => u.email === identifier || u.userID === identifier);
+
+      if (!userData || userData.password !== password) {
+          alert("⚠️Invalid Credentials");
+          return;
+      }
+
+      console.log(userData); // Debugging: Check the data structure in the console
+      alert("✅Login Successful! ");
+
+      // Ensure correct field mapping
+      document.getElementById("userId").innerText = userData.userID || "N/A";
+      document.getElementById("userName").innerText = userData.username || "N/A";
+      document.getElementById("userEmail").innerText = userData.email || "N/A";
+      document.getElementById("userPhone").innerText = userData.phone || "N/A";
+
+      document.getElementById("userRole").innerText = userData.role || "N/A";
+
+
+      document.getElementById("investigator").value = userData.username ;
+      document.getElementById("forensicAnalyst").value = userData.username ;
+      document.getElementById("stegoAnalyst").value = userData.username ;
+
+
+      // Hide login section and show dashboard
+      document.getElementById("loginSection").classList.add("hidden");
+      document.getElementById("dashboardSection").classList.remove("hidden");
+      updateSidebarPermissions(userData.role);
+      updateHeaderByRole(userData.role);
+
+  } catch (error) {
+      alert("❌Login failed! Please check your credentials.");
+      console.error(error);
+  }
+}
+
+function updateHeaderByRole(role) {
+    const headerTitle = document.getElementById("headerTitle");
+    const roleTitles = {
+        "Investigator": "<img src='images/police.png' alt='Investigator' class='emoji' />Welcome to Investigator's Panel",
+        "ForensicAnalyst": "<span class='emoji'>🕵️</span> Welcome to Forensic Analyst's Panel",
+        "StegoAnalyst": "<img src='images/steg.png' alt='Investigator' class='emoji' / >Welcome to Stego Analyst's Panel",
+        "HigherAuthority": "<span class='emoji'>🏛️</span> Welcome to Higher Authority Panel",
+        "Suspect": "<span class='emoji'>🚨</span> Welcome to Suspect Dashboard"
+    };
+
+    headerTitle.innerHTML = roleTitles[role] || "<span class='emoji'>🔐</span> Welcome to Traceforensics Dashboard";
+    headerTitle.classList.add("styled-heading"); // add style class
+}
+
+
+
+// Function to update sidebar based on user role
+function updateSidebarPermissions(role) {
+  const allowedButtons = rolePermissions[role] || [];
+
+  document.querySelectorAll(".sidebar button").forEach(button => {
+      if (allowedButtons.includes(button.dataset.target) || button.innerText === "Logout") {
+          button.style.display = "block";
+      } else {
+          button.style.display = "none";
+      }
+  });
+}
+
+// Function to handle sidebar navigation
+document.querySelectorAll(".sidebar button").forEach(button => {
+  button.addEventListener("click", function () {
+      document.querySelectorAll(".main-content .container").forEach(section => {
+          section.classList.add("hidden");
+      });
+
+      const targetSection = this.dataset.target;
+      if (targetSection) {
+          document.getElementById(targetSection).classList.remove("hidden");
+      }
+  });
+});
+
+
+
+
+function logoutUser() {
+    alert("You have been logged out.");
+    localStorage.removeItem("currentUser"); // Clear user session
+    localStorage.removeItem("lastVisitedSection"); // Clear last visited section
+    location.reload();
+}
+   // Check if user is already logged in and restore the last visited section
+window.onload = function () {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const lastVisitedSection = localStorage.getItem("lastVisitedSection") || "dashboardSection";
+
+    if (currentUser) {
+        document.getElementById("userName").innerText = currentUser.name;
+        document.getElementById("userRole").innerText = currentUser.role;
+        document.getElementById("registerSection").classList.add("hidden");
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("dashboardSection").classList.add("hidden");
+
+        // Show the last visited section
+        document.getElementById(lastVisitedSection).classList.remove("hidden");
+
+        updateSidebarPermissions(currentUser.role);
+    }
+};
+
+
+
+
+// **Helper Function to Add Options to Dropdowns**
+function addOption(selectElement, value, text) {
+    let option = document.createElement("option");
+    option.value = value;
+    option.textContent = text;
+    selectElement.appendChild(option);
+}
+
+
+
+let suspects = [];
+    let devices = [];
+    function addSuspectDevice(button) {
+    let container = document.getElementById("suspectDeviceContainer");
+    let wrappers = document.querySelectorAll(".suspect-device-wrapper .add-btn");
+    
+    // Hide all previous add buttons
+    wrappers.forEach(btn => btn.style.display = "none");
+
+    // Create new wrapper
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("suspect-device-wrapper");
+    wrapper.style.display = "flex";
+    wrapper.style.alignItems = "center";
+
+    // Create inner div to hold only input fields
+    let inputContainer = document.createElement("div");
+    inputContainer.style.display = "flex";
+    inputContainer.style.gap = "55px"; // Apply gap only to input fields
+    // Create suspect input field
+    let suspectGroup = document.createElement("div");
+    suspectGroup.classList.add("form-groups");
+    let suspectInput = document.createElement("input");
+    suspectInput.type = "text";
+    suspectInput.classList.add("suspect");
+    suspectInput.placeholder = " ";
+    suspectInput.style.width ="320px"; // Set same width as first
+    let suspectLabel = document.createElement("label");
+    suspectLabel.innerText = "Enter suspect name";
+    suspectGroup.appendChild(suspectInput);
+    suspectGroup.appendChild(suspectLabel);
+
+    // Create device input field
+    let deviceGroup = document.createElement("div");
+    deviceGroup.classList.add("form-groups");
+    let deviceInput = document.createElement("input");
+    deviceInput.type = "text";
+    deviceInput.classList.add("digitalDevice");
+    deviceInput.placeholder = " ";
+    deviceInput.style.width =  "320px"; // Set same width as first
+    let deviceLabel = document.createElement("label");
+    deviceLabel.innerText = "Enter device name";
+    deviceGroup.appendChild(deviceInput);
+    deviceGroup.appendChild(deviceLabel);
+
+    // Add input fields to the input container
+    inputContainer.appendChild(suspectGroup);
+    inputContainer.appendChild(deviceGroup);
+
+    // Add button
+    let addBtn = document.createElement("button");
+    addBtn.innerHTML = "➕";
+    addBtn.classList.add("add-btn");
+    addBtn.onclick = function() { addSuspectDevice(this); };
+
+    // Remove button
+    let removeBtn = document.createElement("button");
+    removeBtn.innerHTML = "❌";
+    removeBtn.classList.add("remove-btn");
+    removeBtn.onclick = function() {
+        wrapper.remove();
+        let buttons = document.querySelectorAll(".suspect-device-wrapper .add-btn");
+        if (buttons.length > 0) {
+            buttons[buttons.length - 1].style.display = "inline-block";
+        }
+    };
+
+    // Append elements
+    wrapper.appendChild(inputContainer); // Input fields with gap
+    wrapper.appendChild(addBtn);
+    wrapper.appendChild(removeBtn);
+    container.appendChild(wrapper);
+}
+
+
+async function registerCase() {
+    const caseId = document.getElementById("caseId").value;
+    const title = document.getElementById("caseTitle").value;
+    const description = document.getElementById("description").value;
+    const investigator = document.getElementById("investigator").value;
+    const timestamp = getCurrentTimestamp();
+
+    const suspects = [...document.querySelectorAll(".suspect")]
+        .map(input => input.value).filter(val => val !== "");
+    const devices = [...document.querySelectorAll(".digitalDevice")]
+        .map(input => input.value).filter(val => val !== "");
+
+    const suspectStr = suspects.join(" | ");
+    const deviceStr = devices.join(" | ");
+
+    if (!caseId || !title || !description || !investigator) {
+        alert("All Fields are required");
+        return;
+    }
+
+    const cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (caseExists) {
+        alert("Case ID already exists!");
+        return;
+    }
+
+    accounts = await web3.eth.getAccounts();
+    await casecontract.methods.newCase(caseId, title, description, investigator, suspectStr, deviceStr, timestamp)
+        .send({ from: accounts[0], gas: 1000000 });
+
+    alert(`✅Case Registered Successfully! Case ID: ${caseId}`);
+
+    // Reset form and generate next ID
+    document.getElementById("caseForm").reset();
+    generateCaseId();
+}
+async function generateCaseId() {
+    const cases = await casecontract.methods.viewAllCases().call();
+    const nextCaseNumber = 101 + cases.length; // Start from 101
+    const newCaseId = `CASE${nextCaseNumber}`;
+    document.getElementById("caseId").value = newCaseId;
+}
+
+async function viewCase() {
+    const caseContainer = document.getElementById("caseContainer");
+    const caseDetailsDiv = document.getElementById("caseDetails");
+
+    caseContainer.classList.add("hidden");
+    caseDetailsDiv.innerHTML = "";
+
+    const caseId = document.getElementById("viewCaseId").value.trim();
+    if (!caseId) {
+        alert("Please enter a Case ID!");
+        return;
+    }
+
+    let cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (!caseExists) {
+        alert("Case ID does not exist!");
+        return;
+    }
+
+    const caseDetails = await casecontract.methods.viewCase(caseId).call();
+    if (!caseDetails) {
+        alert("Case details not found!");
+        return;
+    }
+
+    caseContainer.classList.remove("hidden");
+
+    const suspects = caseDetails.suspect ? caseDetails.suspect.split(" | ") : [];
+    const devices = caseDetails.digitalDevice ? caseDetails.digitalDevice.split(" | ") : [];
+    const faResults = caseDetails.FA_Results ? caseDetails.FA_Results.split(" | ") : [];
+    const saResults = caseDetails.SA_Results ? caseDetails.SA_Results.split(" | ") : [];
+
+    const maxLength = Math.max(suspects.length, devices.length, faResults.length, saResults.length);
+    while (suspects.length < maxLength) suspects.push("N/A");
+    while (devices.length < maxLength) devices.push("N/A");
+    while (faResults.length < maxLength) faResults.push("N/A");
+    while (saResults.length < maxLength) saResults.push("N/A");
+
+    const suspect = caseDetails.suspect ? caseDetails.suspect.replace(/\s*\|\s*/g, ", ") : "N/A";
+    const device = caseDetails.digitalDevice ? caseDetails.digitalDevice.replace(/\s*\|\s*/g, ", ") : "N/A";
+
+    let structuredResults = `
+    <div style="max-width: 900px; margin: auto; padding: 20px; background: #f8f9fa; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align:center; color: #2c3e50; font-size: 36px; border-bottom: 3px solid #3498db; padding-bottom: 10px;">Final Case Report</h2>
+        ${caseDetails.newCaseTime ? `<p style="text-align:right; color: #555;"><strong>Time:</strong> ${caseDetails.newCaseTime}</p>` : ""}
+
+        <div style="text-align:left; font-size: 18px;">
+            <p><strong>ID:</strong> ${caseDetails.caseId}</p>
+            <p><strong>Title:</strong> ${caseDetails.caseTitle}</p>
+            <p><strong>Description:</strong> ${caseDetails.description}</p>
+            <p><strong>Investigator:</strong> ${caseDetails.investigator}</p>
+            <p><strong>Suspect(s):</strong> ${suspect}</p>
+            <p><strong>Device(s):</strong> ${device}</p>
+            <p><strong>Status:</strong> <span style="color: ${caseDetails.status === 2 ? 'red' : caseDetails.status === 1 ? 'orange' : 'green'};">${["Open", "Investigating", "Closed"][caseDetails.status]}</span></p>
+        </div>
+        <hr style="border: 1px solid #ccc;">
+    `;
+
+    structuredResults += `
+        <div style="background: #ecf0f1; padding: 15px; border-radius: 5px;">
+            <h3 style="text-align:center; color: #34495e;"><u><b>Forensic Results</b></u></h3>
+            ${caseDetails.forensicUpdateTime ? `<p style="text-align:right; color: #555;"><strong>Time:</strong> ${caseDetails.forensicUpdateTime}</p>` : ""}
+            <div style="text-align:left;">
+                <p><strong>Forensic Analyst:</strong> ${caseDetails.forensicAnalyst || "Not updated"}</p>
+                <p><strong>Forensic Analyst Result(s):</strong></p>
+    `;
+
+    faResults.forEach(result => {
+        structuredResults += `<p style="background: #ffffff; padding: 10px; border-radius: 5px;"> ${result}</p>`;
+    });
+
+    structuredResults += `</div></div><hr>`;
+
+    structuredResults += `
+        <div style="background: #ecf0f1; padding: 15px; border-radius: 5px;">
+            <h3 style="text-align:center; color: #34495e;"><u>Stego Results</u></h3>
+            ${caseDetails.stegoUpdateTime ? `<p style="text-align:right; color: #555;"><strong>Time:</strong> ${caseDetails.stegoUpdateTime}</p>` : ""}
+            <div style="text-align:left;">
+                <p><strong>Stego Analyst:</strong> ${caseDetails.stegoAnalyst || "Not updated"}</p>
+                <p><strong>Stego Analyst Result(s):</strong></p>
+    `;
+
+    saResults.forEach(result => {
+        structuredResults += `<p style="background: #ffffff; padding: 10px; border-radius: 5px;"> ${result}</p>`;
+    });
+
+    structuredResults += `</div></div><hr>`;
+
+    structuredResults += `
+        <h3 style="text-align:center;">Analysis Summary</h3>
+        <table border="1" style="width:100%; text-align:left; border-collapse:collapse; border: 2px solid #ccc;">
+            <tr style="background: #3498db; color: white;">
+                <th>Suspect</th>
+                <th>Device</th>
+                <th>FA Results</th>
+                <th>SA Results</th>
+            </tr>
+    `;
+
+    for (let i = 0; i < maxLength; i++) {
+        structuredResults += `
+            <tr style="background: ${i % 2 === 0 ? '#ecf0f1' : '#ffffff'};">
+                <td>${suspects[i] !== "N/A" ? suspects[i] : "No Data"}</td>
+                <td>${devices[i] !== "N/A" ? devices[i] : "No Data"}</td>
+                <td>${faResults[i] !== "N/A" ? faResults[i] : "No Results Found"}</td>
+                <td>${saResults[i] !== "N/A" ? saResults[i] : "No Results Found"}</td>
+            </tr>
+        `;
+    }
+
+    structuredResults += `</table><br><hr>`;
+
+    structuredResults += `<p style="text-align:left;"><strong>Final Report:</strong> ${caseDetails.report || "No Results Found"}</p>`;
+    structuredResults += `</div>`;
+
+    caseDetailsDiv.innerHTML = structuredResults;
+}
+
+async function fetchCaseForForensic() {
+    const caseId = document.getElementById("forensicCaseId").value;
+    if (!caseId) {
+        alert("Please enter a Case ID!");
+        return;
+    }
+
+    try {
+        const caseDetails = await casecontract.methods.viewCase(caseId).call();
+
+        // 🚫 Check if case is closed
+        if (parseInt(caseDetails.status) === 2) {
+            alert("❌ This case is already closed and cannot be updated.");
+            return;
+        }
+
+         // 🛑 Task acceptance check
+         const taskAccepted = caseDetails.forensicTaskAccepted?.trim();
+        if (taskAccepted === "-") {
+            alert("⚠️ First accept the task of this case.");
+            return;
+        }
+        if (taskAccepted.toLowerCase() === "no") {
+            alert("❌ You have not accepted the task of this case, so you are not eligible to update the case.");
+            return;
+        }
+
+        // Optional: Auto-fill forensic analyst name
+        if (caseDetails.forensicAnalyst) {
+            document.getElementById("forensicAnalyst").value = caseDetails.forensicAnalyst;
+        }
+
+        const devices = caseDetails.digitalDevice ? caseDetails.digitalDevice.split(" | ") : [];
+        const resultsContainer = document.getElementById("forensicResultsContainer");
+        resultsContainer.innerHTML = "";
+
+        const table = document.createElement("table");
+        table.classList.add("forensic-table");
+
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        ["Device", "Choose Folder", "Recovered Files"].forEach(labelText => {
+            const th = document.createElement("th");
+            th.textContent = labelText;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+
+        devices.forEach(device => {
+            const row = document.createElement("tr");
+
+            // Device Cell
+            const deviceCell = document.createElement("td");
+            const deviceInput = document.createElement("input");
+            deviceInput.type = "text";
+            deviceInput.value = device;
+            deviceInput.readOnly = true;
+            deviceInput.classList.add("device-field");
+            deviceCell.appendChild(deviceInput);
+            row.appendChild(deviceCell);
+
+            // Folder Picker Cell
+            const folderCell = document.createElement("td");
+            const fileInput = document.createElement("input");
+            fileInput.type = "file";
+            fileInput.setAttribute("webkitdirectory", "");
+            fileInput.setAttribute("directory", "");
+            fileInput.classList.add("folder-picker");
+            folderCell.appendChild(fileInput);
+            row.appendChild(folderCell);
+
+            // Recovered Files Cell
+            const resultCell = document.createElement("td");
+            const resultInput = document.createElement("textarea");
+            resultInput.placeholder = "FA Result (folder name + files)";
+            resultInput.classList.add("fa-result");
+            resultInput.rows = 6;
+            resultInput.style.resize = "vertical";
+            resultCell.appendChild(resultInput);
+            row.appendChild(resultCell);
+
+            // Folder Selection Logic
+            fileInput.addEventListener("change", function () {
+                const files = Array.from(fileInput.files);
+                if (files.length === 0) return;
+
+                const folderMap = {};
+                files.forEach(file => {
+                    const relativePath = file.webkitRelativePath;
+                    const pathParts = relativePath.split("/");
+                    const rootFolder = pathParts[0];
+                    const filePath = pathParts.slice(1).join("/");
+
+                    if (!folderMap[rootFolder]) {
+                        folderMap[rootFolder] = [];
+                    }
+                    folderMap[rootFolder].push(filePath);
+                });
+
+                const folderSections = Object.entries(folderMap).map(([folder, files]) => {
+                    return `📁 Folder: ${folder}\n${files.join("\n")}`;
+                });
+
+                resultInput.value = folderSections.join(" |\n");
+            });
+
+            tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        resultsContainer.appendChild(table);
+
+    } catch (err) {
+        alert("❌ Invalid Case ID or unable to fetch case.");
+        console.error(err);
+    }
+}
+
+async function updateCaseForensic() {
+    const caseId = document.getElementById("forensicCaseId").value;
+    const analyst = document.getElementById("forensicAnalyst").value;
+    const timestamp = getCurrentTimestamp();
+
+    if (!caseId || !analyst) {
+        alert("Please enter Case ID and Analyst Name!");
+        return;
+    }
+
+    const cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (!caseExists) {
+        alert("Case ID does not exist!");
+        return;
+    }
+
+    const resultInputs = document.querySelectorAll(".fa-result");
+
+    // Fill empty textareas with default message
+    resultInputs.forEach(input => {
+        if (input.value.trim() === "") {
+            input.value = "# 📁 Folder: Unknown | No Files are Recovered";
+        }
+    });
+
+    const results = [...resultInputs].map(input => input.value.trim());
+
+    if (results.length === 0) {
+        alert("Please upload and select at least one folder with files.");
+        return;
+    }
+
+    // Format the results
+    const resultsStr = results.map(r => {
+        const lines = r.split("\n");
+        let cleaned = "";
+        lines.forEach((line, index) => {
+            if (line.startsWith("📁 Folder:") || line.startsWith("# 📁 Folder:")) {
+                if (cleaned !== "") {
+                    cleaned += " "; // space between folders
+                }
+                if (!line.startsWith("#")) {
+                    cleaned += `# ${line.trim()}`;
+                } else {
+                    cleaned += line.trim();
+                }
+            } else if (line.trim() !== "") {
+                cleaned += ` | ${line.trim()}`;
+            }
+        });
+        return cleaned;
+    }).join(" ");
+
+    const accounts = await web3.eth.getAccounts();
+    await casecontract.methods
+        .updateCaseByForensic(caseId, analyst, resultsStr, timestamp)
+        .send({ from: accounts[0], gas: 1000000 });
+
+    alert("✅The case has been updated with Forensic Analyst results!");
+}
+
+async function fetchCaseForStego() {
+    const caseId = document.getElementById("stegoCaseId").value;
+    if (!caseId) {
+        alert("Please enter a Case ID!");
+        return;
+    }
+
+    try {
+        const caseDetails = await casecontract.methods.viewCase(caseId).call();
+
+       
+        // 🚫 Check if case is closed
+        if (parseInt(caseDetails.status) === 2) {
+            alert("❌ This case is already closed and cannot be updated.");
+            return;
+        }
+
+         // 🛑 Task acceptance check for Stego Analyst
+         const stegoTaskAccepted = caseDetails.stegoTaskAccepted?.trim();
+        if (stegoTaskAccepted === "-") {
+            alert("⚠️ First accept the task of this case.");
+            return;
+        }
+        if (stegoTaskAccepted.toLowerCase() === "no") {
+            alert("❌ You have not accepted the task of this case, so you are not eligible to update the case.");
+            return;
+        }
+
+        // Set analyst name if available
+        document.getElementById("stegoAnalyst").value = caseDetails.stegoAnalyst || "";
+
+        const resultsContainer = document.getElementById("stegoResultsContainer");
+        resultsContainer.innerHTML = "";
+
+        // Create table
+        const table = document.createElement("table");
+        table.classList.add("stego-table");
+
+        const headerRow = document.createElement("tr");
+        ["Folder Name", "File Name", "Extracted Data from Recovered Files"].forEach(text => {
+            const th = document.createElement("th");
+            th.textContent = text;
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+
+        const faRaw = caseDetails.FA_Results || "";
+        const folderBlocks = faRaw.split("# 📁 Folder:");
+
+        folderBlocks.forEach(block => {
+            if (!block.trim()) return;
+
+            const parts = block.trim().split("|").map(p => p.trim()).filter(p => p !== "");
+            const folderName = parts[0];
+            const fileNames = parts.slice(1);
+
+            fileNames.forEach((fileName, index) => {
+                const row = document.createElement("tr");
+
+                if (index === 0) {
+                    const folderCell = document.createElement("td");
+                    folderCell.textContent = folderName;
+                    folderCell.rowSpan = fileNames.length;
+                    folderCell.classList.add("folder-cell");
+                    row.appendChild(folderCell);
+                }
+
+                const fileCell = document.createElement("td");
+                fileCell.textContent = fileName;
+                row.appendChild(fileCell);
+
+                const stegoCell = document.createElement("td");
+                const textarea = document.createElement("textarea");
+                textarea.placeholder = "Enter Stego Results";
+                textarea.classList.add("stego-result");
+                textarea.rows = 2;
+                textarea.style.resize = "vertical";
+                textarea.style.border = "none";
+                stegoCell.appendChild(textarea);
+                row.appendChild(stegoCell);
+
+                table.appendChild(row);
+            });
+        });
+
+        resultsContainer.appendChild(table);
+
+    } catch (err) {
+        alert("❌ Invalid Case ID or unable to fetch case.");
+        console.error(err);
+    }
+}
+
+async function updateCaseStego() {
+    const caseId = document.getElementById("stegoCaseId").value;
+    const analyst = document.getElementById("stegoAnalyst").value;
+    const timestamp = getCurrentTimestamp();
+
+    if (!caseId || !analyst) {
+        alert("Please enter Case ID and Analyst Name!");
+        return;
+    }
+
+    let cases = await casecontract.methods.viewAllCases().call();
+    const caseExists = cases.find(c => c.caseId === caseId);
+    if (!caseExists) {
+        alert("Case ID Not exists!");
+        return;
+    }
+    
+
+    // Collect and process results
+    let resultInputs = document.querySelectorAll(".stego-result");
+    let results = [...resultInputs].map(input => {
+        if (input.value.trim() === "") {
+            input.value = "No Hidden Data Found";
+        }
+        return input.value.trim();
+    });
+
+    // Proceed only if there’s at least one result
+    if (results.length === 0) {
+        alert("Please enter results for at least one suspect!");
+        return;
+    }
+
+    // Convert results to '|' separated string
+    const resultsStr = results.join(" | ");
+
+    let accounts = await web3.eth.getAccounts();
+    await casecontract.methods.updateCaseByStego(caseId, analyst, resultsStr, timestamp)
+        .send({ from: accounts[0], gas: 1000000 });
+
+    alert("✅The case has been updated with Stego Analyst results!");
+}
+
+async function closeCase() {
+    const caseId = document.getElementById("closeCaseId").value;
+    const report = document.getElementById("report").value;
+    const timestamp = getCurrentTimestamp(); // Get the current timestamp
+
+    // Input validation
+    if (!caseId || !report) {
+        alert("Please enter Case ID and Summary!");
+        return;
+    }
+
+    try {
+        let cases = await casecontract.methods.viewAllCases().call();
+        const caseExists = cases.find(c => c.caseId === caseId);
+
+        if (!caseExists) {
+            alert("Case ID does not exist!");
+            return;
+        }
+
+        let accounts = await web3.eth.getAccounts();
+        await casecontract.methods.closeCase(caseId, report, timestamp)
+            .send({ from: accounts[0], gas: 1000000 });
+
+        alert("✅Case Closed Successfully!");
+        document.getElementById("allCases").classList.remove("hidden"); // Show the table
+        //document.getElementById("close-case").classList.add("hidden"); //Hide the form
+        viewAllCases(); // Refresh cases
+
+    } catch (error) {
+        console.error("Error closing case:", error);
+        alert("Error closing case. Please try again.");
+    }
+}
+async function viewAllCases() {
+    try {
+        const allCases = await casecontract.methods.viewAllCases().call();
+        let output = `
+            <table border="1" class="cases-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Case ID</th>
+                        <th>Title</th>
+                        <th>Investigator</th>
+                        <th>Status</th>
+                        <th>Finalize Case</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        if (allCases.length === 0) {
+            output += `<tr><td colspan="7">No Cases Filed.</td></tr>`;
+        } else {
+            allCases.forEach((caseDetails, index) => {
+                const status = ["Open", "Investigating", "Closed"][caseDetails.status];
+                let reportButton;
+
+                if (status === "Closed") {
+                    reportButton = '<span style="color: green;font-size: 2em;">&#10004;</span>'; // Green tick
+                } else {
+                    reportButton = `<button onclick="showCloseCase('${caseDetails.caseId}')">Report</button>`;
+                }
+
+                output += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${caseDetails.caseId}</td>
+                        <td>${caseDetails.caseTitle}</td>
+                        <td>${caseDetails.investigator}</td>
+                        <td>${status}</td>
+                        <td>${reportButton}</td>
+                         <td><button onclick="handleView('${caseDetails.caseId}')">View</button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        output += `</tbody></table>`;
+        document.getElementById("allCases").innerHTML = output;
+    } catch (error) {
+        console.error("Error fetching cases:", error);
+        document.getElementById("allCases").innerHTML = "<p>Error loading cases. Please try again.</p>";
+    }
+}
+function showCloseCase(caseId) {
+    document.getElementById("closeCaseId").value = caseId;
+    document.getElementById("close-case").classList.remove("hidden");
+    document.getElementById("allCases").style.display = "none"; // Hide the table
+    document.getElementById("viewAllCasesForm").style.display = "none"; // Hide the table container
+
+    
+}
+
+// Add the hidden class to the close-case section initially
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('close-case').classList.add('hidden');
+});
+async function handleView(caseId) {
+    try {
+        const caseContainer = document.getElementById("caseContainer");
+        const caseDetailsDiv = document.getElementById("caseDetails");
+
+        document.getElementById("allCases").style.display = "none";
+        document.getElementById("viewAllCasesForm").style.display = "none";
+
+        caseContainer.classList.add("hidden");
+        caseDetailsDiv.innerHTML = "";
+
+        if (!caseId || caseId.trim() === "") {
+            alert("⚠️ Please enter a valid Case ID!");
+            return;
+        }
+
+        const cases = await casecontract.methods.viewAllCases().call();
+        const caseDetails = cases.find(c => c.caseId === caseId);
+
+        if (!caseDetails) {
+            alert("⚠️ Case ID does not exist!");
+            return;
+        }
+
+        caseContainer.classList.remove("hidden");
+
+        const suspects = caseDetails.suspect ? caseDetails.suspect.split(" | ") : [];
+        const devices = caseDetails.digitalDevice ? caseDetails.digitalDevice.split(" | ") : [];
+        const faResults = caseDetails.FA_Results || "";
+        const saResults = caseDetails.SA_Results || "";
+
+        const suspectStr = suspects.length ? suspects.join(", ") : "N/A";
+        const deviceStr = devices.length ? devices.join(", ") : "N/A";
+
+        let structuredResults = `
+            <h3 style="text-align:center;color:black;font-size:36px; margin-bottom: 20px;">🕵️ Final Case Report</h3>
+            <hr> 
+            ${caseDetails.newCaseTime ? `<p style="text-align:right;"><strong>🕒 Time:</strong> ${caseDetails.newCaseTime}</p>` : ""}
+            <div style="text-align:left; margin-bottom: 20px;">
+                <p><strong>ID:</strong> ${caseDetails.caseId}</p>
+                <p><strong>Title:</strong> ${caseDetails.caseTitle}</p>
+                <p><strong>Description:</strong> ${caseDetails.description}</p>
+                <p><strong>Investigator:</strong> ${caseDetails.investigator}</p>
+                <p><strong>Suspect(s):</strong> ${suspectStr}</p>
+                <p><strong>Device(s):</strong> ${deviceStr}</p>
+                <p><strong>Status:</strong> ${["Open", "Investigating", "Closed"][caseDetails.status]}</p>
+            </div>
+            <br><hr><br>
+        `;
+
+        // Forensic Results
+        structuredResults += `
+            ${caseDetails.forensicUpdateTime ? `<p style="text-align:right;"><strong>🕒 Time:</strong> ${caseDetails.forensicUpdateTime}</p>` : ""}
+            <h2 style="text-align:center; margin-bottom:10px;">🔬<u> Forensic Results</u></h2>
+            <div style="display:flex; justify-content:space-between;">
+                <p><strong> Forensic Analyst:</strong> ${caseDetails.forensicAnalyst || "Not updated"}</p>
+            </div>
+        `;
+
+        let allFiles = [];
+
+        if (faResults.trim()) {
+            let faTable = `
+                <table style="border-collapse:collapse;width:100%;margin-top:10px;">
+                    <thead><tr>
+                        <th style="width:25%;padding:8px;border:1px solid #999;">💻 Device</th>
+                        <th style="width:25%;padding:8px;border:1px solid #999;">📁 Folder</th>
+                        <th style="width:50%;padding:8px;border:1px solid #999;">📂 File Names</th>
+                    </tr></thead>
+                    <tbody>
+            `;
+
+            const folderSections = faResults.split("#").filter(s => s.trim());
+            folderSections.forEach((section, index) => {
+                const device = devices[index] || `Device ${index + 1}`;
+                const folderMatches = [...section.matchAll(/📁 Folder: (.*?) \| (.*?)(?=(📁 Folder:|$))/gs)];
+
+                folderMatches.forEach(match => {
+                    const folderName = match[1].trim();
+                    const files = match[2].split(" | ").filter(f => f.trim() && f !== "No Files are Recovered");
+
+                    files.forEach(file => {
+                        allFiles.push({ folder: folderName, file: file.trim() });
+                    });
+
+                    const fileList = files.length ? files.join("<br>") : "No Files are Recovered";
+
+                    faTable += `
+                        <tr>
+                            <td style="padding:8px;border:1px solid #999;">${device}</td>
+                            <td style="padding:8px;border:1px solid #999;">${folderName}</td>
+                            <td style="padding:8px;border:1px solid #999;text-align:left; padding-left:20px">${fileList}</td>
+                        </tr>
+                    `;
+                });
+            });
+
+            faTable += `</tbody></table>`;
+            structuredResults += faTable;
+        } else {
+            structuredResults += `<p>No Forensic Results Found</p>`;
+        }
+
+        structuredResults += `<br><hr><br>`;
+
+        // Stego Results
+        structuredResults += `
+            ${caseDetails.stegoUpdateTime ? `<p style="text-align:right;"><strong>🕒 Time:</strong> ${caseDetails.stegoUpdateTime}</p>` : ""}
+            <h2 style="text-align:center;margin-bottom:10px;">🔎<u> Stego Results</u></h2>
+            <div style="display:flex; justify-content:space-between;">
+                <p><strong> Stego Analyst:</strong> ${caseDetails.stegoAnalyst || "Not updated"}</p>
+            </div>
+        `;
+
+        if (saResults.trim() && allFiles.length) {
+            const hiddenDataList = saResults.split(" | ").map(item => item.trim());
+
+            const folderMap = {};
+            allFiles.forEach((fileObj, index) => {
+                if (!folderMap[fileObj.folder]) {
+                    folderMap[fileObj.folder] = [];
+                }
+                folderMap[fileObj.folder].push({
+                    file: fileObj.file,
+                    hidden: hiddenDataList[index] || "No Hidden Data Found"
+                });
+            });
+
+            let saTable = `
+                <table style="border-collapse:collapse;width:100%;margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th style="width:25%;padding:8px;border:1px solid #999;">📁 Folder</th>
+                            <th style="width:25%;padding:8px;border:1px solid #999;">📂 File</th>
+                            <th style="width:50%;padding:8px;border:1px solid #999;">🕵️ Hidden Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            for (const folder in folderMap) {
+                const files = folderMap[folder];
+                files.forEach((entry, idx) => {
+                    saTable += `<tr>`;
+                    if (idx === 0) {
+                        saTable += `<td style="padding:8px;border:1px solid #999;" rowspan="${files.length}">${folder}</td>`;
+                    }
+                    saTable += `
+                        <td style="padding:8px;border:1px solid #999;">${entry.file}</td>
+                      <td style="padding:8px;border:1px solid #999;text-align:left; padding-left:5px">${entry.hidden.replace(/\n/g, '<br>')}</td>
+                    </tr>`;
+                });
+            }
+
+            saTable += `</tbody></table>`;
+            structuredResults += saTable;
+        } else {
+            structuredResults += `<p>No Hidden Data Found or FA Results missing</p>`;
+        }
+
+        structuredResults += `<br><hr><br>`;
+
+        // Analysis
+        structuredResults += `<h2 style="text-align:center;">📊 Analysis</h2>`;
+
+        if (saResults.trim() && allFiles.length) {
+            const hiddenDataList = saResults.split(" | ").map(item => item.trim());
+
+            let analysisTable = `
+                <table style="border-collapse:collapse;width:100%;margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;padding:8px;border:1px solid #999;">🧍 Suspect</th>
+                            <th style="width:15%;padding:8px;border:1px solid #999;">💻 Device</th>
+                            <th style="width:15%;padding:8px;border:1px solid #999;">📁 Folder</th>
+                            <th style="width:15%;padding:8px;border:1px solid #999;">📂 File</th>
+                            <th style="width:40%;padding:8px;border:1px solid #999;">🕵️ Hidden Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            const folderGroups = {};
+            allFiles.forEach((fileObj, idx) => {
+                const folder = fileObj.folder.trim();
+                const file = fileObj.file.trim();
+                if (folder.toLowerCase() === "unknown" || file.toLowerCase() === "no files recovered") return;
+
+                if (!folderGroups[folder]) folderGroups[folder] = [];
+                folderGroups[folder].push({
+                    file: file,
+                    hidden: hiddenDataList[idx] || "No Hidden Data Found"
+                });
+            });
+
+            let folderIndex = 0;
+            Object.entries(folderGroups).forEach(([folder, fileData]) => {
+                const validFileData = fileData.filter(data => data.hidden !== "No Hidden Data Found");
+                if (validFileData.length === 0) return;
+
+                const rowspan = validFileData.length;
+                const suspect = suspects[Math.floor(folderIndex / (Object.keys(folderGroups).length / suspects.length))] || "N/A";
+                const device = devices[Math.floor(folderIndex / (Object.keys(folderGroups).length / devices.length))] || "N/A";
+
+                validFileData.forEach((data, idx) => {
+                    analysisTable += "<tr>";
+                    if (idx === 0) {
+                        analysisTable += `
+                            <td rowspan="${rowspan}" style="padding:8px;border:1px solid #999;">${suspect}</td>
+                            <td rowspan="${rowspan}" style="padding:8px;border:1px solid #999;">${device}</td>
+                            <td rowspan="${rowspan}" style="padding:8px;border:1px solid #999;">${folder}</td>
+                        `;
+                    }
+                    analysisTable += `
+                        <td style="padding:8px;border:1px solid #999;">${data.file}</td>
+                        <td style="padding:8px;border:1px solid #999;text-align:left; padding-left:5px">${data.hidden.replace(/\n/g, '<br>')}</td>
+                    </tr>`;
+                });
+
+                folderIndex++;
+            });
+
+            analysisTable += `</tbody></table>`;
+            structuredResults += analysisTable;
+        } else {
+            structuredResults += `<p>No Analysis Data Found</p>`;
+        }
+
+        structuredResults += `<br><hr><br>`;
+
+        // Final Report
+        structuredResults += `
+            ${caseDetails.closeCaseTime ? `<p style="text-align:right;"><strong>🕒 Time:</strong> ${caseDetails.closeCaseTime}</p>` : ""}
+            <h2 style="text-align:center;margin-bottom:10px;">📝<u> Final Report</u></h2>
+        `;
+
+        if (caseDetails.report && caseDetails.report !== "N/A") {
+            structuredResults += `<p style="text-align:left;"><strong>Summary:</strong><br>${caseDetails.report.replace(/\n/g, "<br>")}</p>`;
+        } else {
+            structuredResults += `<p>No Report Found</p>`;
+        }
+
+        caseDetailsDiv.innerHTML = structuredResults;
+
+    } catch (error) {
+        console.error("Error fetching case details:", error);
+        alert("❌ An error occurred while fetching case details.");
+    }
+}
+
+
+function goBackToTable() {
+    document.getElementById("caseContainer").classList.add("hidden");  // Hide the report
+    document.getElementById("allCases").style.display = "block";       // Show the table again
+    document.getElementById("viewAllCasesForm").style.display = "block"; // Show the view form
+}
+let selectedCaseId = ""; // Store Case ID globally
+
+function handleEvidence(caseId) { 
+    selectedCaseId = caseId; // Store the caseId globally
+
+    document.getElementById("viewAllCasesForm").style.display = "none"; 
+
+    // Hide the cases table and its heading completely
+    document.getElementById("allCases").style.display = "none"; 
+
+    // Show only the updateCaseForm
+    document.getElementById("updateCaseForm").classList.remove("hidden");
+}
+
+
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll(".container").forEach(el => el.classList.add("hidden"));
+
+    // Show the selected section
+    document.getElementById(sectionId).classList.remove("hidden");
+
+    // Only auto-fill Case ID if selectedCaseId is set
+    if (selectedCaseId) {
+        if (sectionId === "update-case-forensic") {
+            document.getElementById("forensicCaseId").value = selectedCaseId;
+        } else if (sectionId === "update-case-stego") {
+            document.getElementById("stegoCaseId").value = selectedCaseId;
+        } else if (sectionId === "close-case") {
+            document.getElementById("closeCaseId").value = selectedCaseId;
+        }
+    } else {
+        // Clear input fields if no case is selected
+        if (sectionId === "update-case-forensic") {
+            document.getElementById("forensicCaseId").value = "";
+        } else if (sectionId === "update-case-stego") {
+            document.getElementById("stegoCaseId").value = "";
+        } else if (sectionId === "close-case") {
+            document.getElementById("closeCaseId").value = "";
+        }
+    }
+}
+
+
+        async function accept(caseId, type, btn) {
+    const row = btn.parentElement.parentElement;
+    const acceptSelect = row.children[3].querySelector('select');
+    const statusSelect = row.children[4].querySelector('select');
+    const accepted = acceptSelect.value;
+    const originalAccepted = acceptSelect.dataset.originalValue || acceptSelect.value;
+    let status = statusSelect.value;
+
+    if (accepted === "-" && status === "Started") {
+        alert("Please choose to accept or reject the task assigned to you.");
+        return;
+    }
+
+    if (accepted !== originalAccepted) {
+        const acceptConfirm = confirm(`Are you sure you want to ${accepted === "Yes" ? "accept" : "reject"} this task?`);
+        if (!acceptConfirm) {
+            acceptSelect.value = originalAccepted;
+            return;
+        }
+        acceptSelect.dataset.originalValue = accepted;
+    }
+
+    try {
+        if (accepted === "No") {
+            status = "-";
+        }
+        accounts = await web3.eth.getAccounts();
+        await casecontract.methods.updateTaskStatus(caseId, type, status, accepted, new Date().toLocaleString()).send({ from: accounts[0],gas:1000000 });
+
+        acceptSelect.disabled = true;
+
+        if (accepted === "No") {
+            statusSelect.disabled = true;
+            btn.outerHTML = `<button disabled style="background-color:white;">❌</button>`;
+        }
+
+        if (status.trim().toLowerCase() === "started") {
+            alert("Work status updated to Started.");
+        } else if (status.trim().toLowerCase() === "in progress") {
+            alert("Work status updated to In Progress.");
+        } else if (status.trim().toLowerCase() === "completed") {
+            alert("Work status updated to Completed.");
+            statusSelect.disabled = true;
+            btn.outerHTML = `<button disabled style="background-color:white;">✅</button>`;
+        }
+        loadCases();
+    } catch (error) {
+        console.error("Error updating task status:", error);
+        alert("Failed to update task status. Please check the console for details.");
+    }
+}
+
+async function assign(caseId, type, btn) {
+    const inputOrSelect = btn.parentElement.previousElementSibling.querySelector('input, select');
+    let name;
+
+    if (inputOrSelect.tagName === 'INPUT') {
+        name = inputOrSelect.value.trim();
+    } else {
+        name = inputOrSelect.value;
+    }
+
+    if (!name || name === "") {
+        alert("Please select or enter analyst name");
+        return;
+    }
+
+    accounts = await web3.eth.getAccounts();
+    await casecontract.methods.assignTask(caseId, type, name).send({ from: accounts[0], gas: 1000000 });
+
+    if (inputOrSelect.tagName === 'INPUT') {
+        inputOrSelect.disabled = true;
+    } else {
+        inputOrSelect.disabled = true; // Disable the select dropdown
+    }
+    btn.innerHTML = "✔️";
+    btn.style.backgroundColor = "white";
+    btn.disabled = true;
+    alert(`Task Assigned to ${type === 'forensic' ? 'Forensic' : 'Stego'} Analyst Successfully ✅`);
+    loadCases();
+}
+async function loadCases() {
+    // 1. Fetch all cases from the smart contract using the viewAllCases() method.
+    const cases = await casecontract.methods.viewAllCases().call();
+
+    // 2. Get references to the table body elements for each table.
+    const assignBody = document.querySelector("#assignTaskTable tbody");
+    const forensicBody = document.querySelector("#forensicAcceptTable tbody");
+    const stegoBody = document.querySelector("#stegoAcceptTable tbody");
+
+    // 3. Clear the existing content of each table body.
+    assignBody.innerHTML = '';
+    forensicBody.innerHTML = '';
+    stegoBody.innerHTML = '';
+
+    // 4. Get the logged-in user's role and name from the HTML elements.
+    const loggedInUserRole = document.getElementById("userRole").innerText.trim();
+    const loggedInUserName = document.getElementById("userName").innerText.trim();
+
+    // 5. Initialize counters for the number of rows displayed in each table.
+    let assignRowsDisplayed = 0;
+    let forensicRowsDisplayed = 0;
+    let stegoRowsDisplayed = 0;
+
+    // 6. Fetch all registered users from the userContract.
+    const allUsers = await userContract.methods.viewRegisteredUsers().call();
+
+    // 7. Filter the users to get the forensic and stego analysts.
+    const forensicAnalysts = allUsers.filter(user => user.role === "ForensicAnalyst").map(user => user.username);
+    const stegoAnalysts = allUsers.filter(user => user.role === "StegoAnalyst").map(user => user.username);
+
+    // 8. Generate the HTML options for the analyst dropdowns.
+    const forensicAnalystOptions = forensicAnalysts.map(name => `<option value="${name}">${name}</option>`).join('');
+    const stegoAnalystOptions = stegoAnalysts.map(name => `<option value="${name}">${name}</option>`).join('');
+
+    // 9. Iterate through each case.
+    cases.forEach((c) => {
+        // 10. Determine if the forensic and stego tasks are completed and accepted.
+        const forensicCompleted = (c.forensicStatus || "").toLowerCase() === "completed";
+        const forensicAccepted = ["Yes", "No"].includes(c.forensicTaskAccepted) ? c.forensicTaskAccepted : "-";
+        const forensicStatus = ["Started", "In progress", "Completed"].includes(c.forensicStatus) ? c.forensicStatus : "-";
+        const stegoCompleted = (c.stegoStatus || "").toLowerCase() === "completed";
+        const stegoAccepted = ["Yes", "No"].includes(c.stegoTaskAccepted) ? c.stegoTaskAccepted : "-";
+        const stegoStatus = ["Started", "In progress", "Completed"].includes(c.stegoStatus) ? c.stegoStatus : "-";
+
+        // 11. Create a new table row element.
+        const row = document.createElement('tr');
+
+        // 12. Determine if the current case should be displayed in the assignTaskTable.
+        let shouldDisplayAssignRow = false;
+        if (loggedInUserRole === "Investigator" || (loggedInUserRole === "ForensicAnalyst" && c.forensicAnalyst === "N/A") || (loggedInUserRole === "StegoAnalyst" && c.stegoAnalyst === "N/A")) {
+            shouldDisplayAssignRow = true;
+        }
+
+        // 13. If the case should be displayed in the assignTaskTable, create the row's HTML.
+        if (shouldDisplayAssignRow) {
+            row.innerHTML = `
+                <td>${c.caseId}</td>
+                <td>${c.investigator}</td>
+                <td>
+                    ${c.forensicAnalyst !== "N/A" 
+                        ? `<input type="text" value="${c.forensicAnalyst}" disabled />` 
+                        : `<select>
+                            <option value="">Select Analyst</option>
+                            ${forensicAnalystOptions}
+                        </select>`}
+                </td>
+                <td>
+                    ${c.forensicAnalyst !== "N/A" 
+                        ? `<button disabled style="background-color:white;">✔️</button>` 
+                        : `<button onclick="assign('${c.caseId}', 'forensic', this)">Assign</button>`}
+                </td>
+                <td class="forensic-accepted">${c.forensicAnalyst === "N/A" ? "-" : forensicAccepted}</td>
+                <td class="forensic-status">${c.forensicAnalyst === "N/A" ? "-" : (forensicAccepted === "No" ? "❌" : forensicStatus)} ${forensicCompleted ? '✅' : ''}</td>
+                ${forensicCompleted ? `
+                    <td>
+                        ${c.stegoAnalyst !== "N/A" 
+                            ? `<input type="text" value="${c.stegoAnalyst}" disabled />` 
+                            : `<select>
+                                <option value="">Select Analyst</option>
+                                ${stegoAnalystOptions}
+                            </select>`}
+                    </td>
+                    <td>
+                        ${c.stegoAnalyst !== "N/A" 
+                            ? `<button disabled style="background-color:white;">✔️</button>` 
+                            : `<button onclick="assign('${c.caseId}', 'stego', this)">Assign</button>`}
+                    </td>
+                    <td class="stego-accepted">${c.stegoAnalyst === "N/A" ? "-" : stegoAccepted}</td>
+                    <td class="stego-status">${c.stegoAnalyst === "N/A" ? "-" : (stegoAccepted === "No" ? "❌" : stegoStatus)} ${stegoCompleted ? '✅' : ''}</td>
+                ` : `<td colspan="4" style="color: gray; font-style: italic;">IT WILL DISPLAY AFTER FORENSIC WORK COMPLETED</td>`}
+            `;
+            // 14. Append the row to the assignTaskTable body.
+            assignBody.appendChild(row);
+            // 15. Increment the assignRowsDisplayed counter.
+            assignRowsDisplayed++;
+        }
+
+        // 16. If the logged-in user is the assigned forensic analyst, create the row for forensicAcceptTable.
+        if (c.forensicAnalyst === loggedInUserName && loggedInUserRole === "ForensicAnalyst") {
+            const fRow = document.createElement('tr');
+            const isFStatusCompleted = forensicCompleted || forensicAccepted === "No";
+            fRow.innerHTML = `
+                <td>${c.caseId}</td>
+                <td>${c.investigator}</td>
+                <td>${c.forensicAnalyst}</td>
+                <td>
+                    <select data-original-value="${forensicAccepted}" ${isFStatusCompleted ? "disabled" : ""}>
+                        <option value="-" ${forensicAccepted === "-" ? "selected" : ""}>Select</option>
+                        <option value="Yes" ${forensicAccepted === "Yes" ? "selected" : ""}>Yes</option>
+                        <option value="No" ${forensicAccepted === "No" ? "selected" : ""}>No</option>
+                    </select>
+                </td>
+                <td>
+                    <select ${isFStatusCompleted ? "disabled" : ""}>
+                        <option value="Started" ${forensicStatus === "Started" ? "selected" : ""}>Started</option>
+                        <option value="In progress" ${forensicStatus === "In progress" ? "selected" : ""}>In progress</option>
+                        <option value="Completed" ${forensicStatus === "Completed" ? "selected" : ""}>Completed</option>
+                    </select>
+                </td>
+                <td>${isFStatusCompleted ? `<button disabled style="background-color: ${forensicAccepted === "No" ? "white" : "white"};">${forensicAccepted === "No" ? "❌" : "✅"}</button>` : `<button onclick="accept('${c.caseId}', 'forensic', this)">Update</button>`}</td>
+            `;
+            forensicBody.appendChild(fRow);
+            forensicRowsDisplayed++;
+        }
+
+        // 17. If the logged-in user is the assigned stego analyst and forensic task is complete, create the row for stegoAcceptTable.
+        if (forensicCompleted && c.stegoAnalyst === loggedInUserName && loggedInUserRole === "StegoAnalyst") {
+            const sRow = document.createElement('tr');
+            const isSStatusCompleted = stegoCompleted || stegoAccepted === "No";
+            sRow.innerHTML = `
+                <td>${c.caseId}</td>
+                <td>${c.investigator}</td>
+                <td>${c.stegoAnalyst}</td>
+                <td>
+                    <select data-original-value="${stegoAccepted}" ${isSStatusCompleted ? "disabled" : ""}>
+                        <option value="-" ${stegoAccepted === "-" ? "selected" : ""}>Select</option>
+                        <option value="Yes" ${stegoAccepted === "Yes" ? "selected" : ""}>Yes</option>
+                        <option value="No" ${stegoAccepted === "No" ? "selected" : ""}>No</option>
+                    </select>
+                </td>
+                <td>
+                    <select ${isSStatusCompleted ? "disabled" : ""}>
+                        <option value="Started" ${stegoStatus === "Started" ? "selected" : ""}>Started</option>
+                        <option value="In progress" ${stegoStatus === "In progress" ? "selected" : ""}>In progress</option>
+                        <option value="Completed" ${stegoStatus === "Completed" ? "selected" : ""}>Completed</option>
+                    </select>
+                </td>
+                <td>${isSStatusCompleted ? `<button disabled style="background-color: ${stegoAccepted === "No" ? "white" : "white"};">${stegoAccepted === "No" ? "❌" : "✅"}</button>` : `<button onclick="accept('${c.caseId}', 'stego', this)">Update</button>`}</td>
+            `;
+            stegoBody.appendChild(sRow);
+            stegoRowsDisplayed++;
+        }
+    });
+
+    // 18. If no rows were added to each table, display a "no tasks" message.
+    if (assignRowsDisplayed === 0) {
+        assignBody.innerHTML = '<tr><td colspan="10" style="text-align: center;">😔 No Cases Filed.</td></tr>';
+    }
+    if (forensicRowsDisplayed === 0) {
+        forensicBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">😔 No tasks are assigned to you.</td></tr>';
+    }
+    if (stegoRowsDisplayed === 0) {
+        stegoBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">😔 No tasks are assigned to you.</td></tr>';
+    }
+}
+window.onload = function () {
+    // existing onload content...
+    generateCaseId(); // Add this line
+    loadCases();
+};
+
+
+</script>
+</body>
+</html>
